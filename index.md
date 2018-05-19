@@ -6,7 +6,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 ### Personnal Blog
 
-This page is maybe a good place to redirect my huge audience to my [technical blog](https://blog.behrouzecom) (in :FR:) where you will find:
+This page is maybe a good place to redirect my huge audience to my [technical blog](https://blog.behrouze.com) (in :FR:) where you will find:
 ```
 * Must see Videos
 * Noticable Tools I use (or used)
@@ -14,4 +14,4 @@ This page is maybe a good place to redirect my huge audience to my [technical bl
 
 ### Another side of me
 
-If you know me, you probably also know that I am also photographer: [behrouze.com](http://behrouzecom)
+If you know me, you probably also know that I am also photographer: [behrouze.com](http://behrouze.com)
