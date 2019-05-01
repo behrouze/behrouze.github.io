@@ -1,2 +1,2 @@
 # behrouze.github.io
-Just to tryout github pages
+Just to trying out github pages and display it on http://github.behrouze.com/
