@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkbehrouze_tech_blog=self.webpackChunkbehrouze_tech_blog||[]).push([[330],{3889:function(e,t,l){l.r(t);var n=l(6687),r=l(6063);t.default=function(e){var t,l=e.pageContext;return n.createElement(r.A,{pageTitle:""+(null==l||null===(t=l.frontmatter)||void 0===t?void 0:t.title)},n.createElement("div",{className:"post-"+l.id},n.createElement("div",{dangerouslySetInnerHTML:{__html:l.html}})))}}}]);
+//# sourceMappingURL=component---src-templates-wp-page-tsx-d6427489a3af39d80c8a.js.map

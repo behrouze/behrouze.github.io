@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-wp-post-tsx",
+    "path": "/entity-framework-4-0-gros-bug",
+    "result": {"pageContext":{"id":"da31f67a-d957-551a-a76a-80dd98e188cf","fileAbsolutePath":"/home/behrouze/Sources/gatsby-blog/obsidian/Blog/entity-framework-4-0-gros-bug.md","frontmatter":{"categories":["dot-net"],"date":"2012-10-27","lastUpdate":null,"tags":null,"title":"Entity Framework 4.0 GROS bug aléatoire"},"html":"<p>certains développeurs ont ou vont peut etre rencontrer aléatoirement l'erreur suivante lors du Run de leur page, sans réussir à trouver d'erreur dans leur code...: <em>'Unable to load one or more of the requested types'</em></p>\n<p>résolution: Lorsque vous définissez votre , utiliser l'attribbut <strong>ContextTypeName</strong> et spécifier le FQDN de votre entité. Le bug disparait comme par magie !</p>\n<p>Ce problème est résolut dans le <a href=\"http://www.microsoft.com/en-us/download/details.aspx?id=30653\" title=\"Microsoft .NET Framework 4.5\">Microsoft .NET Framework 4.5</a></p>"}},
+    "staticQueryHashes": ["1026020893","1333896537","28434099"]}
