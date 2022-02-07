@@ -53,12 +53,11 @@ L’installation de web-ext qui est un module <a href="/nvm-nodejs" title="Nodej
 <h3>Run et debug</h3>
 <p>Il suffit ensuite le lancer en sélectionnant parmi ses options :</p>
 <h4>watch</h4>
-<p>le mode watcher est le mode par défaut il n'y a pas d'option a sélectionner pour cela :
-<code class="language-text">web-ext run</code></p>
+<p><code class="language-text">web-ext run</code> : le mode <em>watcher</em> est le mode par défaut</p>
 <h4>console</h4>
-<p>il est possible d'ouvrir automatiquement la console pour debugger plus rapidement :
-<code class="language-text">web-ext run --browser-console</code></p>
+<p><code class="language-text">web-ext run --browser-console</code> : permet d'ouvrir automatiquement la console pour debugger plus rapidement</p>
 <h4>un profil Firefox dédié</h4>
+<p><code class="language-text">web-ext run --firefox-profile nom_profile_firefox --keep-profile-changes</code></p>
 <p>le développement d'extension plus que d'autres type de développements requiert l'utilisation d'un environement Navigateur :</p>
 <ul>
 <li>propre sans parasitage par d'autres extensions, d'où l'interet d'utiliser un profil Firefox dédié</li>
@@ -69,11 +68,9 @@ L’installation de web-ext qui est un module <a href="/nvm-nodejs" title="Nodej
 <li><code class="language-text">--firefox-profile xxx</code></li>
 <li><code class="language-text">--keep-profile-changes</code></li>
 </ul>
-<p><code class="language-text">web-ext run --firefox-profile nom_profile_firefox --keep-profile-changes</code></p>
 <p><code class="language-text">nom_profile_firefox</code> le nom du profile courant se récupère dans Firefox avec <code class="language-text">about:profiles</code> et requiert parfois le chemin absolu 😳</p>
 <h4>linting</h4>
-<p>Une autre option bien utile est le <a href="https://extensionworkshop.com/documentation/develop/web-ext-command-reference/#web-ext-lint">linter</a> qui va vérifier le manifest, les permissions et des incohérences dans le projet (à lancer avant de packager le projet) :
-<code class="language-text">web-ext lint</code></p>
+<p><code class="language-text">web-ext lint</code> : une autre option bien utile est le <a href="https://extensionworkshop.com/documentation/develop/web-ext-command-reference/#web-ext-lint">linter</a> qui va vérifier le manifest, les permissions et des incohérences dans le projet (à lancer avant de packager le projet)</p>
 <h4>build &#x26; sign</h4>
 <p>En fin de process il faudra finalement <strong>builder</strong> (packager) et <strong>signer</strong> son extension (<a href="https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/#packaging-your-extension">voir doc</a>), ce qui va se faire avec les 2 options :</p>
 <ul>
@@ -84,7 +81,8 @@ L’installation de web-ext qui est un module <a href="/nvm-nodejs" title="Nodej
 <p>il est bien sur possible de combiner les options de lancement de <code class="language-text">web-ext</code> :
 <code class="language-text">web-ext run --browser-console --firefox-profile default-release</code></p>
 <h4>web-ext docs</h4>
-<p>on trouvera la <a href="https://extensionworkshop.com/documentation/develop/web-ext-command-reference/">doc</a> avec <code class="language-text">web-ext docs</code> et aussi l'aide en ligne de la commande avec le <code class="language-text">web-ext --help</code>:</p>
+<p><code class="language-text">web-ext docs</code> : pour ouvrir dans son navigateur par défaut la page de <a href="https://extensionworkshop.com/documentation/develop/web-ext-command-reference/">doc</a></p>
+<p><code class="language-text">web-ext --help</code> :</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">npx web-ext --help
 Usage: web-ext <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token builtin class-name">command</span>
 
@@ -135,4 +133,4 @@ Options <span class="token builtin class-name">:</span></code></pre></div>
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/extension-firefox-chrome";window.___webpackCompilationHash="92d85a701b5cf747fbbf";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-a4b09fa46789b3b434c2.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-d6427489a3af39d80c8a.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-f5cf34345488556083de.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-f5cf34345488556083de.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-9dc0a4f24174f9c3e8bd.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-6c76308e3febb07c5cb7.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/extension-firefox-chrome";window.___webpackCompilationHash="c48d627d5b5c581d443c";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-a4b09fa46789b3b434c2.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-d6427489a3af39d80c8a.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-f5cf34345488556083de.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-f5cf34345488556083de.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-9dc0a4f24174f9c3e8bd.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-6c76308e3febb07c5cb7.js" async=""></script></body></html>
