@@ -33,6 +33,11 @@
       />
   </a>
     </span></p>
+<p>Gatsby est un generateur de site static, et un élément maitre dans l'univers de la <a href="https://jamstack.org/generators/">JAMSTACK react</a>.</p>
+<blockquote>
+<p>Jamstack is an architecture designed to make the web faster, more secure, and easier to scale [...]</p>
+</blockquote>
+<p>The core principles of <a href="https://jamstack.org/glossary/pre-render">pre-rendering</a>, and <a href="https://jamstack.org/glossary/decoupling">decoupling</a>, enable sites and applications to be delivered with greater confidence and resilience than ever before.</p>
 <p>Avant de commencer lire ces quelques pages</p>
 <ul>
 <li><a href="https://www.gatsbyjs.com/docs/conceptual/gatsby-core-philosophy/">Gatsby Core Philosophy</a></li>
@@ -42,29 +47,29 @@
 <h2>Pages</h2>
 <p>Il existe 4 façon de créer des pages avec Gatsby</p>
 <ul>
-<li><code class="language-text">src/pages</code> : en créant un composant React avec un export par default dans ce dossier</li>
-<li><a href="https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/">File System Route API</a> : permet de créer des <strong>collection route</strong> et <strong>client-only route</strong> grâce au Graphql data layer de Gatsby et de générer des pages en utilisant des placeholders dans les noms de dossiers/fichiers (comme dans Nextjs)</li>
+<li><code class="language-text">src/pages</code> : en créant un composant React (avec un export par default) dans ce dossier</li>
+<li><a href="https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/">File System Route API</a> : permet de créer des <strong>collection route</strong> et <strong>client-only route</strong> grâce au <strong>Graphql data layer</strong> de Gatsby et de générer des pages en utilisant des placeholders (des crochets <code class="language-text">[</code> et <code class="language-text">]</code>) dans les noms de dossiers/fichiers (comme dans Nextjs)</li>
 <li><code class="language-text">gatsby-node.js</code> : en implementant l'API <a href="https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createPages"><code class="language-text">createPages</code></a></li>
 <li><a href="https://www.gatsbyjs.com/docs/plugins/">Plugins</a> : certains plugins peuvent créer des pages (elles utilisent également l'API <a href="https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createPages"><code class="language-text">createPages</code></a>)</li>
 </ul>
 <h2>Data</h2>
-<p>Avec Gatsby les données qui alimentent les pages peuvent provenir de :</p>
+<p>Avec Gatsby les données qui alimentent les pages peuvent provenir de requêtes POST (REST ou Graphql) :</p>
 <ul>
-<li>requetes POST (REST ou Graphql) au <a href="https://www.gatsbyjs.com/docs/glossary#runtime"><em>runtime</em></a> (classique pour les app Front)</li>
+<li>au <a href="https://www.gatsbyjs.com/docs/glossary#runtime"><em>runtime</em></a> (classique pour les app Front)</li>
 <li>ou au <a href="https://www.gatsbyjs.com/docs/glossary#build"><em>build time</em></a></li>
 </ul>
 <p>Cela permet de qualifier les pages générées par Gatsby d'<a href="https://www.gatsbyjs.com/docs/adding-app-and-website-functionality/#hybrid-app-pages">hybrides</a>.</p>
-<p>L'<a href="https://www.gatsbyjs.com/docs/reference/graphql-data-layer/graphql-api/">API Graphql</a> (<a href="https://www.gatsbyjs.com/docs/conceptual/graphql-concepts/#understanding-the-parts-of-a-query">infos graphql</a>) permet d'interroger la couche de données de Gatsby ainsi que de <a href="https://www.gatsbyjs.com/docs/graphql-reference/#dates">limit, skip, sort, filter, format</a> le résultat de sa requete.</p>
+<p>L'<a href="https://www.gatsbyjs.com/docs/reference/graphql-data-layer/graphql-api/">API Graphql</a> (<a href="https://www.gatsbyjs.com/docs/conceptual/graphql-concepts/#understanding-the-parts-of-a-query">infos graphql</a>) permet d'interroger la couche de données de Gatsby ainsi que de <a href="https://www.gatsbyjs.com/docs/graphql-reference/#dates">limit, skip, sort, filter, format</a> le résultat de sa requête.</p>
 <h3>Différents types de Query</h3>
-<p>Gatsby permet de requeter des données dans :</p>
+<p>Gatsby permet de requêter des données dans :</p>
 <ul>
 <li>des <strong>pages</strong></li>
 <li>des <strong>composants</strong></li>
 <li>le fichier <strong>gatsby-node.js</strong>.</li>
 </ul>
-<p>Le requetage s'effectue grâce à des requetes de type <strong>page query</strong> ou de <strong>static query</strong> selon le type de composants dans lequel on se trouve (page ou non).</p>
+<p>Le requêtage s'effectue grâce à des requêtes de type <strong>page query</strong> ou de <strong>static query</strong> selon le type de composants dans lequel on se trouve (page ou non).</p>
 <h3>Page Query</h3>
-<p>Il faut utiliser des requetes de type Page Query pour interroger le Data Layer de Gatsby dans les <a href="https://www.gatsbyjs.com/docs/conceptual/building-with-components/#how-does-gatsby-use-react-components">pages</a> Gatsby, c'est à dire dans :</p>
+<p>Il faut utiliser des requêtes de type Page Query pour interroger le Data Layer de Gatsby dans les <a href="https://www.gatsbyjs.com/docs/conceptual/building-with-components/#how-does-gatsby-use-react-components">pages</a> Gatsby, c'est à dire dans :</p>
 <ul>
 <li>composants React présents dans le dossier <code class="language-text">src/pages</code></li>
 <li>pages créées automatiquement lors de l'appel de <code class="language-text">createPage</code> dans le fichier <code class="language-text">gatsby-node.js</code> avec l'utilisation de l'option <code class="language-text">component</code> qui va designer le composant qui sera considéré comme page</li>
@@ -80,7 +85,7 @@ GraphQL arguments for variables in your queries.</p>
 <p>Dans un fichier donné (page ou composant) n'est pas possbile de :</p>
 <ol>
 <li><em>mélanger les 2 types de Queries</em></li>
-<li>d'avoir <em>plusieurs query</em> par composant, il est possible d'utiliser une requetes avec plusieurs <a href="https://www.gatsbyjs.com/docs/conceptual/graphql-concepts/#query-fields">root fields</a></li>
+<li>d'avoir <em>plusieurs query</em> par composant, il est possible d'utiliser une requêtes avec plusieurs <a href="https://www.gatsbyjs.com/docs/conceptual/graphql-concepts/#query-fields">root fields</a></li>
 </ol>
 <h3>Sourcing via un plugin</h3>
 <p>Pour sourcer notre application en données via un source plugin, il faut:</p>
@@ -103,7 +108,7 @@ GraphQL arguments for variables in your queries.</p>
     }
   </span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span></code></pre></div>
 <p><sub>exemple tiré de la doc officielle: <a href="https://www.gatsbyjs.com/docs/conceptual/data-fetching/">https://www.gatsbyjs.com/docs/conceptual/data-fetching/</a></sub>
-3. lors du build, la <a href="https://www.gatsbyjs.com/docs/static-vs-normal-queries/#distinguishing-between-static-and-normal-queries">requete graphql est exécutée et remplacée</a> pour générer un fichier JSON
+3. lors du build, la <a href="https://www.gatsbyjs.com/docs/static-vs-normal-queries/#distinguishing-between-static-and-normal-queries">requête graphql est exécutée et remplacée</a> pour générer un fichier JSON
 4. toujours lors du build, le JSON est dynamiquement importé dans le JSX</p>
 <h3>Liens</h3>
 <p>voir complément d'infos dans:</p>
@@ -134,7 +139,7 @@ ex <code class="language-text">I ♥ Dogs</code> sera automatiquement converti e
 <li><code class="language-text">gatsby info</code></li>
 </ul>
 <h3>Debug dans VSCode</h3>
-<p><a href="https://www.gatsbyjs.com/docs/debugging-the-build-process/#vs-code-debugger-auto-config">https://www.gatsbyjs.com/docs/debugging-the-build-process/#vs-code-debugger-auto-config</a></p></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 16/01/22<!-- --> </span><span>, <!-- -->maj le 18/01/22<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+<p><a href="https://www.gatsbyjs.com/docs/debugging-the-build-process/#vs-code-debugger-auto-config">https://www.gatsbyjs.com/docs/debugging-the-build-process/#vs-code-debugger-auto-config</a></p></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 16/01/22<!-- --> </span><span>, <!-- -->maj le 07/02/22<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
   
   if(true) {
