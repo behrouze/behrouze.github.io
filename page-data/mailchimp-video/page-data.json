@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-templates-wp-post-tsx",
     "path": "/mailchimp-video",
-    "result": {"pageContext":{"id":"46588164-74ab-550b-a743-53c416d791a3","fileAbsolutePath":"/home/behrouze/Sources/gatsby-blog/obsidian/Blog/mailchimp-video.md","frontmatter":{"categories":["productivite"],"date":"2018-02-11","lastUpdate":null,"tags":["tutoriel"],"title":"Mailchimp [vidéo]"},"html":"<p>Voici ma 1ère production Youtubienne :) une introduction à la solution de mailing <a href=\"http://mailchimp.com/\">MailChimp</a> :</p>\n<p><a href=\"https://www.youtube.com/watch?v=T8qfgOBtVMg\">https://www.youtube.com/watch?v=T8qfgOBtVMg</a></p>"}},
+    "result": {"pageContext":{"id":"801a881e-ee95-5158-9a51-66135acb6c79","fileAbsolutePath":"/Users/behrouze/Sources/gatsby-blog/obsidian/Blog/mailchimp-video.md","frontmatter":{"categories":["productivite"],"date":"2018-02-11","lastUpdate":null,"tags":["tutoriel"],"title":"Mailchimp [vidéo]"},"html":"<p>Voici ma 1ère production Youtubienne :) une introduction à la solution de mailing <a href=\"http://mailchimp.com/\">MailChimp</a> :</p>\n<p><a href=\"https://www.youtube.com/watch?v=T8qfgOBtVMg\">https://www.youtube.com/watch?v=T8qfgOBtVMg</a></p>"}},
     "staticQueryHashes": ["1026020893","1333896537","28434099"]}
