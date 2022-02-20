@@ -148,8 +148,15 @@ bind-address            = 0.0.0.0   # autorise les connexions distantes</code></
 <h4>Mode interactif</h4>
 <p><code class="language-text">CTRL + U</code> ou <code class="language-text">CTRL + w</code> supprime les caractères précédent le curseur, donc tout ce qui est a sa gauche
 <code class="language-text">CTRL + K</code> idem pour les caratères à droite jusqu'à la fin de ligne
-<code class="language-text">CTRL + L</code> pour clear l'affichage
-<code class="language-text">\c + ENTER</code> permet de clear le buffer (indiqué dans le msg de login)</p>
+<code class="language-text">CTRL + L</code> pour clear l'affichage</p>
+<p>MariaDB possède un ensemble de "<em>commandes</em>" exécutés dans une session interactive en saisissant par ex <code class="language-text">\? + ENTER</code>  pour obtenir l'accès à l'aide en ligne.</p>
+<p>Les commandes intéressantes sont :
+<code class="language-text">\G</code> affichage en colonne/vertical
+<code class="language-text">\e</code> pour editer la commande courante dans l'<code class="language-text">$EDITOR</code>
+<code class="language-text">\. script.sql</code> pour exécuter le script en argument
+<code class="language-text">\s</code> status du serveur
+<code class="language-text">\! cmd</code> execute une commande shell
+<code class="language-text">\T fichier.log</code> permet de spécifier un fichier dans lequel toute la session sera loggée</p>
 <h4>Historique</h4>
 <p>l'historique des commandes exécutée en mode interactif est conservé dans le fichier <code class="language-text">.mysql_history</code> situé dans le home de l'utilisateur. Pour <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1970829#c1">info</a> ce fichier est encodé</p>
 <blockquote>
@@ -160,6 +167,15 @@ Une fois cette combinaison de touche entrée, on entre dans le <a href="%60CTRL+
 <h4>Exécution de script</h4>
 <div class="gatsby-highlight" data-language="sql"><pre class="language-sql"><code class="language-sql">mysql db_name <span class="token operator">&lt;</span> script<span class="token punctuation">.</span><span class="token keyword">sql</span> <span class="token operator">></span> output<span class="token punctuation">.</span>tab</code></pre></div>
 <p>voir toutes les <a href="https://mariadb.com/kb/en/mysql-command-line-client/#options">options de la CLI mysql</a></p>
+<h4>Backup à la barbare</h4>
+<p>La carte micro-sd d'un de mes Raspberry Pie a laché, mais heureusement pour moi elle était encore lisible (mais dead en écriture).</p>
+<p>Le backup à la barbare consiste à récupérer le contenu du dossier <code class="language-text">/var/lib/mysql</code> sur la carte cramée puis sur le nouveau serveur (ayant une installation de mariadb) :</p>
+<ul>
+<li>arreter l'instance de mariadb avec <code class="language-text">sudo systemctl stop mariadb</code></li>
+<li>remplacer le dossier <code class="language-text">/var/lib/mysql</code> local par celui de l'ancien serveur</li>
+<li>supprimer les ib_logfiles  <code class="language-text">rm /var/lib/mysql/ib_logfile*</code>  sans quoi on aura des erreurs du type <code class="language-text">[ERROR] Unknown/unsupported storage engine: InnoDB</code> lors de l'accès aux données</li>
+<li><code class="language-text">sudo systemctl start mariadb</code></li>
+</ul>
 <h2>Liens</h2>
 <ul>
 <li><a href="https://www.mysqltutorial.org/mysql-administration">MySQLTutorial.org</a> site de tuto très clair 🌟 avec de nombreux exemples</li>
@@ -181,4 +197,4 @@ Une fois cette combinaison de touche entrée, on entre dans le <a href="%60CTRL+
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/mariadb-mysql";window.___webpackCompilationHash="4f17e1440c8c802af85d";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-a4b09fa46789b3b434c2.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-d6427489a3af39d80c8a.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-f5cf34345488556083de.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-f5cf34345488556083de.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-9dc0a4f24174f9c3e8bd.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-4d8b553b20e84285ff64.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/mariadb-mysql";window.___webpackCompilationHash="affcf9badc643c34ff96";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-a4b09fa46789b3b434c2.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-d6427489a3af39d80c8a.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-f5cf34345488556083de.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-f5cf34345488556083de.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-9dc0a4f24174f9c3e8bd.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-4d8b553b20e84285ff64.js" async=""></script></body></html>
