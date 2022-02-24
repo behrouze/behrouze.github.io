@@ -43,7 +43,7 @@
 <li>Guides des <a href="https://www.gatsbyjs.com/docs/conceptual">conceptes</a></li>
 <li>les nouvelles options de rendu (<a href="https://www.gatsbyjs.com/docs/conceptual/rendering-options/">SSR et DSG</a>) <a href="https://www.gatsbyjs.com/gatsby-4/">Gatsby v4</a> le <a href="https://www.gatsbyjs.com/docs/conceptual/rendering-options/#static-site-generation-ssg">Static Site Generation (SSG)</a> est le mode de rendu par défaut (<em>build time pre-rendering</em>)</li>
 </ul>
-<h2>Pages</h2>
+<h1>Pages</h1>
 <p>Il existe 4 façon de créer des pages avec Gatsby</p>
 <ul>
 <li><code class="language-text">src/pages</code> : en créant un composant React (avec un export par default) dans ce dossier</li>
@@ -51,7 +51,7 @@
 <li><code class="language-text">gatsby-node.js</code> : en implementant l'API <a href="https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createPages"><code class="language-text">createPages</code></a></li>
 <li><a href="https://www.gatsbyjs.com/docs/plugins/">Plugins</a> : certains plugins peuvent créer des pages (elles utilisent également l'API <a href="https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/#createPages"><code class="language-text">createPages</code></a>)</li>
 </ul>
-<h2>Data</h2>
+<h1>Data</h1>
 <p>Avec Gatsby les données qui alimentent les pages peuvent provenir de requêtes POST (REST ou Graphql) :</p>
 <ul>
 <li>au <a href="https://www.gatsbyjs.com/docs/glossary#runtime"><em>runtime</em></a> (classique pour les app Front)</li>
@@ -59,7 +59,7 @@
 </ul>
 <p>Cela permet de qualifier les pages générées par Gatsby d'<a href="https://www.gatsbyjs.com/docs/adding-app-and-website-functionality/#hybrid-app-pages">hybrides</a>.</p>
 <p>L'<a href="https://www.gatsbyjs.com/docs/reference/graphql-data-layer/graphql-api/">API Graphql</a> (<a href="https://www.gatsbyjs.com/docs/conceptual/graphql-concepts/#understanding-the-parts-of-a-query">infos graphql</a>) permet d'interroger la couche de données de Gatsby ainsi que de <a href="https://www.gatsbyjs.com/docs/graphql-reference/#dates">limit, skip, sort, filter, format</a> le résultat de sa requête.</p>
-<h3>Différents types de Query</h3>
+<h2>Différents types de Query</h2>
 <p>Gatsby permet de requêter des données dans :</p>
 <ul>
 <li>des <strong>pages</strong></li>
@@ -67,26 +67,26 @@
 <li>le fichier <strong>gatsby-node.js</strong>.</li>
 </ul>
 <p>Le requêtage s'effectue grâce à des requêtes de type <strong>page query</strong> ou de <strong>static query</strong> selon le type de composants dans lequel on se trouve (page ou non).</p>
-<h3>Page Query</h3>
+<h2>Page Query</h2>
 <p>Il faut utiliser des requêtes de type Page Query pour interroger le Data Layer de Gatsby dans les <a href="https://www.gatsbyjs.com/docs/conceptual/building-with-components/#how-does-gatsby-use-react-components">pages</a> Gatsby, c'est à dire dans :</p>
 <ul>
 <li>composants React présents dans le dossier <code class="language-text">src/pages</code></li>
 <li>pages créées automatiquement lors de l'appel de <code class="language-text">createPage</code> dans le fichier <code class="language-text">gatsby-node.js</code> avec l'utilisation de l'option <code class="language-text">component</code> qui va designer le composant qui sera considéré comme page</li>
 </ul>
-<p>La pageQuery est un [Tagged template](### <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates" title="Permalink to Tagged templates">Tagged templates</a>) qui va retourner des données disponibles via la props <code class="language-text">data</code> du composant.
+<p>La pageQuery est un [Tagged template](## <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates" title="Permalink to Tagged templates">Tagged templates</a>) qui va retourner des données disponibles via la props <code class="language-text">data</code> du composant.
 GraphQL arguments for variables in your queries.</p>
 <p><a href="https://www.gatsbyjs.com/docs/how-to/querying-data/page-query/">Guide</a></p>
-<h3>Static Query</h3>
+<h2>Static Query</h2>
 <p>Utilisable dans un composant, l'utilisation d'une Static Query se fait via le hook <code class="language-text">useStaticQuery</code> (ou à l'ancienne 😋 avec le composant <code class="language-text">StaticQuery</code>).</p>
 <p>You can only have one <code class="language-text">StaticQuery</code> per page: in order to include the data you need from multiple sources, you can use one query with multiple <a href="https://www.gatsbyjs.com/docs/conceptual/graphql-concepts/#query-fields">root fields</a>. It cannot take variables as arguments.</p>
 <p><a href="https://www.gatsbyjs.com/docs/how-to/querying-data/static-query/">Guide</a></p>
-<h3>Ne pas mélanger</h3>
+<h2>Ne pas mélanger</h2>
 <p>Dans un fichier donné (page ou composant) n'est pas possbile de :</p>
 <ol>
 <li><em>mélanger les 2 types de Queries</em></li>
 <li>d'avoir <em>plusieurs query</em> par composant, il est possible d'utiliser une requêtes avec plusieurs <a href="https://www.gatsbyjs.com/docs/conceptual/graphql-concepts/#query-fields">root fields</a></li>
 </ol>
-<h3>Sourcing via un plugin</h3>
+<h2>Sourcing via un plugin</h2>
 <p>Pour sourcer notre application en données via un source plugin, il faut:</p>
 <ol>
 <li>d'abord l'installer <code class="language-text">npm i gatsby-source-xxxx</code> puis l'ajouter au fichier de config <a href="https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/"><code class="language-text">gatsby-config.js</code></a></li>
@@ -109,7 +109,7 @@ GraphQL arguments for variables in your queries.</p>
 <p><sub>exemple tiré de la doc officielle: <a href="https://www.gatsbyjs.com/docs/conceptual/data-fetching/">https://www.gatsbyjs.com/docs/conceptual/data-fetching/</a></sub>
 3. lors du build, la <a href="https://www.gatsbyjs.com/docs/static-vs-normal-queries/#distinguishing-between-static-and-normal-queries">requête graphql est exécutée et remplacée</a> pour générer un fichier JSON
 4. toujours lors du build, le JSON est dynamiquement importé dans le JSX</p>
-<h3>Liens</h3>
+<h2>Liens</h2>
 <p>voir complément d'infos dans:</p>
 <ul>
 <li><a href="https://www.gatsbyjs.com/docs/conceptual/data-fetching/">Build Time and Client Runtime Data Fetching</a></li>
@@ -117,27 +117,27 @@ GraphQL arguments for variables in your queries.</p>
 <li><a href="https://www.gatsbyjs.com/docs/conceptual/react-hydration">Understanding React Hydration guide</a></li>
 <li>the process of fetching data at build time and creating pages from the data is <a href="https://www.gatsbyjs.com/docs/tutorial/part-5/">covered in more depth in the tutorial</a> as well as the docs for <a href="https://www.gatsbyjs.com/docs/programmatically-create-pages-from-data/">creating pages from data programmatically</a>.</li>
 </ul>
-<h2>Routing</h2>
-<h3>Routing par défaut</h3>
+<h1>Routing</h1>
+<h2>Routing par défaut</h2>
 <p>Tout composant situé dans  <code class="language-text">src/pages</code> sera accessible via son nom de fichier <a href="#Slugs">slugisé</a>
 Une page index.js situé dans un sous dossier sera accessible via le nom du dossier <code class="language-text">src/pages/blog/index.js</code> sera accessible via <code class="language-text">/blog</code>.</p>
-<h3>Gatsby’s File System Route API</h3>
+<h2>Gatsby’s File System Route API</h2>
 <p>Tous les composants situés dans /pages (et dessous) seront routés automatiquement.
 Par ex les pages dynamiques du type <code class="language-text">src/pages/blog/{mdx.slug}.js</code> seront accessible via l'url <code class="language-text">/blog/xxx</code>.</p>
 <p><a href="https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/#collection-route--fallback">2 exemples de routing</a> :
 - <code class="language-text">src/pages/products/{Product.name}.js</code> (collection route)
 - <code class="language-text">src/pages/products/[name].js</code> (client-only route, fallback)</p>
-<h2>Slugs</h2>
+<h1>Slugs</h1>
 <p>Avec le plugin <code class="language-text">gatsby-plugin-mdx</code> Gatsby génère automatiquement des noeuds slug avec le nom du fichier sans l'extension.</p>
 <p>Si on souhaite générer les slugs nous meme, Gatsby <a href="https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/#routing-and-linking">“slugify”</a> automatiquement toutes les routes:
 ex <code class="language-text">I ♥ Dogs</code> sera automatiquement converti en  <code class="language-text">i-love-dogs</code>.</p>
-<h2>Tips</h2>
+<h1>Tips</h1>
 <p>Faire le <a href="https://www.gatsbyjs.com/docs/tutorial/">tuto officiel</a>.</p>
 <ul>
 <li><code class="language-text">gatsby clean</code> permet de vider le cache. Utile après déplacement de fichiers ou renommages par ex. Relancer ensuite le script npm</li>
 <li><code class="language-text">gatsby info</code></li>
 </ul>
-<h3>Debug dans VSCode</h3>
+<h2>Debug dans VSCode</h2>
 <p><a href="https://www.gatsbyjs.com/docs/debugging-the-build-process/#vs-code-debugger-auto-config">https://www.gatsbyjs.com/docs/debugging-the-build-process/#vs-code-debugger-auto-config</a></p></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 16/01/22<!-- --> </span><span>, <!-- -->maj le 07/02/22<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
   
@@ -154,4 +154,4 @@ ex <code class="language-text">I ♥ Dogs</code> sera automatiquement converti e
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/gatsby";window.___webpackCompilationHash="f7aaefc60b5fd3e3da51";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/gatsby";window.___webpackCompilationHash="30f6ddd065efe5d16217";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>

@@ -33,7 +33,7 @@
       />
   </a>
     </span></p>
-<h2>Sessions tmux</h2>
+<h1>Sessions tmux</h1>
 <p>Il faut tout d’abord lancer <code class="language-text">tmux</code> (qui fait apparaitre la barre <code class="language-text">tmux</code> en bas du terminal) qui va créer une session par défaut, à partir de là il est possible d’envoyer des instructions à <code class="language-text">tmux</code> (via la combinaison de touches <code class="language-text">CTRL + B</code>) comme ouvrir un onglet, renommer l’onglet, partager l’écran etc.</p>
 <ul>
 <li><code class="language-text">tmux</code> : lance <code class="language-text">tmux</code> avec une session nommée 0 par défaut</li>
@@ -42,32 +42,32 @@
 <li><code class="language-text">tmux ls</code> : <strong>liste</strong> les sessions</li>
 <li><code class="language-text">tmux kill-session -t nom_de_ma_session</code> : <strong>kill</strong> la session (contenant toutes les fenêtres et onglets) nommé</li>
 </ul>
-<h2>Commandes tmux</h2>
+<h1>Commandes tmux</h1>
 <p>La séquence <code class="language-text">CTRL + B</code> permet d’envoyer une commande à <code class="language-text">tmux</code>, suivi de la touche qui donnera l’instruction.<br>
 ex: <code class="language-text">CTRL + B</code> puis <code class="language-text">c</code> (pour créer un nouvel onglet)</p>
-<h3>Basics</h3>
+<h2>Basics</h2>
 <ul>
 <li><code class="language-text">c</code> : <strong>créer</strong> un nouvel onglet (<em>create</em>)</li>
 <li><code class="language-text">,</code> : <strong>renommer</strong> l’onglet en cours</li>
 <li><code class="language-text">x</code> : <strong>killer</strong> le panneau en cours</li>
 <li><code class="language-text">d</code> : se <strong>détacher</strong> d’une session</li>
 </ul>
-<h3>Écran splitté</h3>
+<h2>Écran splitté</h2>
 <ul>
 <li><code class="language-text">%</code> : split <strong>vertical</strong></li>
 <li><code class="language-text">"</code> : split <strong>horizontal</strong></li>
 <li><code class="language-text">espace</code> : <strong>cycle</strong> entre des layouts différents des <strong>panneaux</strong></li>
 <li><code class="language-text">ALT + flèches</code> : <strong>redimensionne</strong> le panneau en cours avec les flèches</li>
 </ul>
-<h3>Navigation</h3>
+<h2>Navigation</h2>
 <ul>
 <li><code class="language-text">p</code> et <code class="language-text">n</code> : <strong>naviguer</strong> entre les onglets (<em>previous</em> et <em>next</em>)</li>
 <li><code class="language-text">w</code> : <strong>liste</strong> les fenêtres et panneaux avec un aperçu et permet de naviguer graphiquement</li>
 <li><code class="language-text">o</code> : passe au <strong>panneau</strong> suivant (cycle)</li>
 <li><code class="language-text">[</code> : permet de naviguer avec les <strong>flèches</strong> et Page Up/Down (et démarrer un copier/coller voir ci-dessous)</li>
 </ul>
-<h2>Trucs et astuces</h2>
-<h3>copier/coller</h3>
+<h1>Trucs et astuces</h1>
+<h2>copier/coller</h2>
 <p>tmux comporte une sort de presse-papier (clipboard) qui nous permet de faire du copier/coller entre les différents onglets/panneaux, par exemple si on souhaite copier du texte ou lien depuis lynx, il suffit:</p>
 <ul>
 <li>d’être dans une session tmux</li>
@@ -82,9 +82,9 @@ ex: <code class="language-text">CTRL + B</code> puis <code class="language-text"
 <code class="language-text">CTRL + B +</code> ]</li>
 </ul>
 <p><a href="https://unix.stackexchange.com/questions/83811/how-to-select-a-line-of-text-in-the-archaic-terminal-browser-links">source</a></p>
-<h2>Configuration avec <code class="language-text">~/.tmux.conf</code></h2>
+<h1>Configuration avec <code class="language-text">~/.tmux.conf</code></h1>
 <p>La configuration de tmux est définie dans le fichier <code class="language-text">~/.tmux.conf</code>.</p>
-<h3>scroll avec souris</h3>
+<h2>scroll avec souris</h2>
 <p>Pour pouvoir scroller et utiliser un menu contextuel avec la souris dans le terminal:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">set</span> -g mouse on
 setw -g aggressive-resize on
@@ -93,14 +93,14 @@ setw -g aggressive-resize on
 
 <span class="token builtin class-name">set</span> -g status-bg black
 <span class="token builtin class-name">set</span> -g status-fg white</code></pre></div>
-<h3>conservation de l’historique</h3>
+<h2>conservation de l’historique</h2>
 <p>Lorsqu’on commence à utiliser tmux, on se rend vite compte que l’historique des commandes n’est pas conservée (dans le .bash_history par ex). C’est une fonctionnalité qu’il faut configurer:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">set</span> -g history-file ~/.tmux_history</code></pre></div>
-<h3>env bash</h3>
+<h2>env bash</h2>
 <p>Pour obtenir votre shell bash avec toutes ses variables d’env et la coloration:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">set</span> -g default-command <span class="token function">bash</span>
 <span class="token builtin class-name">set</span> -g default-terminal <span class="token string">"tmux-256color"</span></code></pre></div>
-<h2>Liens</h2>
+<h1>Liens</h1>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=bTbDxaGo4tA">Linux Leech</a></li>
 <li><a href="https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/">Making tmux Pretty and Usable</a></li>
@@ -120,4 +120,4 @@ setw -g aggressive-resize on
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/tmux";window.___webpackCompilationHash="f7aaefc60b5fd3e3da51";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/tmux";window.___webpackCompilationHash="30f6ddd065efe5d16217";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>

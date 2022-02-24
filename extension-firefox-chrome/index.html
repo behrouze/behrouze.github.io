@@ -7,14 +7,14 @@
 <li>ou encore modifier complètement l'apparence visuel des sites visités (ex l'extension <a href="https://addons.mozilla.org/fr/firefox/addon/darkreader/">Dark Reader</a>)</li>
 </ul>
 <p>Le <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions">développement d’une extension</a> repose sur des technos web classique javascript/html/css et une API WebExtensions cross-browser (voir les 2 docs <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs">MDN</a> et <a href="https://developer.chrome.com/docs/extensions/reference/">Google</a>).</p>
-<h2>Compatibilité <strong>Firefox</strong> et Chrome</h2>
+<h1>Compatibilité <strong>Firefox</strong> et Chrome</h1>
 <p>Il est possible d’écrire des extensions cross-browser <em>compatibles</em> <strong>Firefox</strong> et <strong>Chrome</strong>.
 Cela se fait simplement par la prise en charge du namespace chrome par Firefox…</p>
 <p>Il faut également noter que le W3C a déclaré en 2021 la <a href="https://www.w3.org/community/webextensions/2021/06/04/forming-the-wecg/">création d'un groupe de travail WECG</a>, la WebExtensions Community Group initiée par Mozilla, Google, Microsoft et Apple dans le but d'uniformiser les API et joindre les efforts :</p>
 <blockquote>
 <p>This <a href="https://www.w3.org/groups/#cgbg">community group</a> seeks to align on a common vision for browser extensions and to work towards future standardization.</p>
 </blockquote>
-<h2>Le Workflow de développement</h2>
+<h1>Le Workflow de développement</h1>
 <p>Mozilla nous aide en documentant le <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Firefox_workflow_overview">workflow</a> de développement d'une extension:</p>
 <ol>
 <li>concevoir</li>
@@ -22,10 +22,10 @@ Cela se fait simplement par la prise en charge du namespace chrome par Firefox�
 <li>soumettre</li>
 <li>gérer la vie de l’extension</li>
 </ol>
-<h3>Point de départ</h3>
+<h2>Point de départ</h2>
 <p><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions">Le process de création des extensions</a> est plutot bien documenté, et Mozilla fourni différents guides connexes (par ex <a href="https://design.firefox.com/photon/introduction/principles.html">Photon Design System</a>, portail Mozilla est dédié aux <em>best practices</em> et <em>design UI</em> des extension pour Firefox).</p>
 <p>🚀 un conseil : démarrer avec <a href="https://extensionworkshop.com/documentation/develop/browser-extension-development-tools/">cette page</a> qui présente tous les outils dispo comme notamment le <a href="https://webextensions.in/">web-ext scafolder</a> qui va vous générer un zip contenant les fichiers essentiel à votre développement.</p>
-<h3>La Big Picture</h3>
+<h2>La Big Picture</h2>
 <p>Le projet de développement d’une extension doit être composé des éléments suivants</p>
 <ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json">manifest.json</a> qui va <em>décrire l’extension</em>, ses <em>permissions</em> ainsi que ses <a href="https://developer.mozilla.org/fr/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#rendre_accessible_des_ressources_web">resources</a> : icônes, nom et points d’entrées etc</li>
@@ -42,21 +42,21 @@ Cela se fait simplement par la prise en charge du namespace chrome par Firefox�
 <li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#web_accessible_resources">resources</a> : les <em>images</em>, <em>html</em>, <em>js</em> et css <em>utilisés</em> au sein de l'extension par les content scripts et <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Sharing_objects_with_page_scripts">page scripts</a></li>
 </ul>
 <p>voir <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#sidebars_popups_and_options_pages">Anatomie d'une WebExtension</a></p>
-<h2>web-ext</h2>
+<h1>web-ext</h1>
 <p>Avec <code class="language-text">web-ext</code> Mozilla nous fourni un outil qui <strong>améliore le confort de développement</strong> en nous évitant certaintes étapes manuelles comme le re/chargement d’extension… (le fameux <code class="language-text">about:debugging#/runtime/this-firefox</code>).</p>
-<h3>Installation</h3>
+<h2>Installation</h2>
 L’installation de web-ext qui est un module <a href="/nvm-nodejs" title="Nodejs">Nodejs</a> s’effectue avec un simple npm i -g web-ext et comporte comme pré-requis (pour web-ext v6):
 <ul>
 <li><a href="https://nodejs.org/en/">Node.js</a>, 12.0.0 ou sup</li>
 <li><a href="https://www.npmjs.com/">npm</a>, 6.9.0 ou sup</li>
 </ul>
-<h3>Run et debug</h3>
+<h2>Run et debug</h2>
 <p>Il suffit ensuite le lancer en sélectionnant parmi ses options :</p>
-<h4>watch</h4>
+<h3>watch</h3>
 <p><code class="language-text">web-ext run</code> : le mode <em>watcher</em> est le mode par défaut</p>
-<h4>console</h4>
+<h3>console</h3>
 <p><code class="language-text">web-ext run --browser-console</code> : permet d'ouvrir automatiquement la console pour debugger plus rapidement</p>
-<h4>un profil Firefox dédié</h4>
+<h3>un profil Firefox dédié</h3>
 <p><code class="language-text">web-ext run --firefox-profile nom_profile_firefox --keep-profile-changes</code></p>
 <p>le développement d'extension plus que d'autres type de développements requiert l'utilisation d'un environement Navigateur :</p>
 <ul>
@@ -69,18 +69,18 @@ L’installation de web-ext qui est un module <a href="/nvm-nodejs" title="Nodej
 <li><code class="language-text">--keep-profile-changes</code></li>
 </ul>
 <p><code class="language-text">nom_profile_firefox</code> le nom du profile courant se récupère dans Firefox avec <code class="language-text">about:profiles</code> et requiert parfois le chemin absolu 😳</p>
-<h4>linting</h4>
+<h3>linting</h3>
 <p><code class="language-text">web-ext lint</code> : une autre option bien utile est le <a href="https://extensionworkshop.com/documentation/develop/web-ext-command-reference/#web-ext-lint">linter</a> qui va vérifier le manifest, les permissions et des incohérences dans le projet (à lancer avant de packager le projet)</p>
-<h4>build &#x26; sign</h4>
+<h3>build &#x26; sign</h3>
 <p>En fin de process il faudra finalement <strong>builder</strong> (packager) et <strong>signer</strong> son extension (<a href="https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/#packaging-your-extension">voir doc</a>), ce qui va se faire avec les 2 options :</p>
 <ul>
 <li><code class="language-text">web-ext build</code></li>
 <li><code class="language-text">web-ext sign</code></li>
 </ul>
-<h4>combinaison</h4>
+<h3>combinaison</h3>
 <p>il est bien sur possible de combiner les options de lancement de <code class="language-text">web-ext</code> :
 <code class="language-text">web-ext run --browser-console --firefox-profile default-release</code></p>
-<h4>web-ext docs</h4>
+<h3>web-ext docs</h3>
 <p><code class="language-text">web-ext docs</code> : pour ouvrir dans son navigateur par défaut la page de <a href="https://extensionworkshop.com/documentation/develop/web-ext-command-reference/">doc</a></p>
 <p><code class="language-text">web-ext --help</code> :</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">npx web-ext --help
@@ -102,20 +102,28 @@ Commandes <span class="token builtin class-name">:</span>
   web-ext docs   Open the web-ext documentation <span class="token keyword">in</span> a browser
 
 Options <span class="token builtin class-name">:</span></code></pre></div>
-<h2>Liens</h2>
-<h3>Docs</h3>
+<h1>Liens</h1>
+<h2>Docs</h2>
 <ul>
 <li>Page d'<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions">intro MDN</a></li>
+<li><a href="https://developer.mozilla.org/fr/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension">Anatomie</a> 🧠 d’une extension Firefox</li>
 <li>L'outil de génération de projet <a href="https://webextensions.in/">webextensions.in</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#sidebars_popups_and_options_pages">Anatomie d'une extension</a></li>
-<li><a href="https://developer.chrome.com/docs/extensions/">Chrome Developers</a></li>
+<li>liste des <a href="https://developer.mozilla.org/fr/docs/Mozilla/Add-ons/WebExtensions/API">API WebExtensions</a> et <a href="https://developer.mozilla.org/fr/docs/Mozilla/Add-ons/WebExtensions/Compatibilit%C3%A9_navigateurs_API_JavaScript">tableau de compatibilité</a> entre navigateurs</li>
+<li>comment <a href="https://extensionworkshop.com/documentation/develop/debugging/">debugger</a> 🐛 les <em>différents types d’extensions</em></li>
+<li>comment <a href="https://extensionworkshop.com/documentation/publish/">faire signer une extension</a>, 📄 validation par Mozilla</li>
+<li><a href="https://github.com/mozilla/webextension-polyfill#webextension-browser-api-polyfill--">polyfill</a> pour utiliser les <em>Promises</em> sur <em>Chromium</em></li>
+<li><a href="https://extensionworkshop.com/documentation/develop/build-a-secure-extension/">Best Practices de sécurité</a></li>
+<li>Documentation <a href="https://developer.chrome.com/docs/extensions/">Chrome Developers</a></li>
 </ul>
-<h3>Exemples de code</h3>
+<h2>Exemples de code</h2>
 <ul>
-<li><a href="https://github.com/GoogleChrome/chrome-extensions-samples/blob/master/extensions/gmail/background.js">icône avec compteur</a>)</li>
+<li><a href="https://github.com/mdn/webextensions-examples">Mozilla</a> et leurs <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Examples">index</a> (mapping entre exemples et API JavaScript utilisés)</li>
+<li><a href="https://github.com/GoogleChrome/chrome-extensions-samples">Google Chrome Extensions</a> (ex: gmail, <a href="https://github.com/GoogleChrome/chrome-extensions-samples/blob/master/extensions/gmail/background.js">icône avec compteur</a>)</li>
 </ul>
-<h3>Vidéos</h3>
+<h2>Vidéos</h2>
 <ul>
+<li><a href="https://www.youtube.com/watch?v=Jxe7AXgbYqY">Browser Extensions</a> par Matt Claypotch à la JSConf US 2018 (33 min)</li>
+<li><a href="https://www.youtube.com/watch?v=a0_OsLGI0k4">Tips for great content and design for your extension</a> (3 min)</li>
 <li><a href="https://www.youtube.com/watch?v=Q3AQ5D2QFwc">How to build an extension for Firefox in less than 5 minutes</a> (5 min)</li>
 </ul></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 18/12/20<!-- --> </span><span>, <!-- -->maj le 07/02/22<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
@@ -133,4 +141,4 @@ Options <span class="token builtin class-name">:</span></code></pre></div>
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/extension-firefox-chrome";window.___webpackCompilationHash="f7aaefc60b5fd3e3da51";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/extension-firefox-chrome";window.___webpackCompilationHash="30f6ddd065efe5d16217";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>

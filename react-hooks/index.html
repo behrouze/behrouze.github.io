@@ -11,7 +11,7 @@ Dan Abramov (React Conf 2018)</p>
 <li>mieux rassembler la logique du code au sein d’un même composant (éclaté dans les différents lifecyle methods des classes)</li>
 <li>permettre de créer un moyen de partager du code devant gérer un état local avec les <code class="language-text">custom hooks</code></li>
 </ul>
-<h2>UseState</h2>
+<h1>UseState</h1>
 <p><code class="language-text">UseState</code> est l’un des 1er hooks introduit dans <a href="https://youtu.be/V-QO-KO90iQ?t=588">React v16.8</a>.<br>
 Il permet de disposer d’un state au sein d’un function component, là où une classe était nécessaire avec toute la plomberie qui allait avec (déclarer un objet state initial, appeler super( ) dans le constructeur, binding du this pour les méthodes etc.).</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> useState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
@@ -21,18 +21,18 @@ Il permet de disposer d’un state au sein d’un function component, là où un
 
   <span class="token keyword">return</span> <span class="token operator">&lt;</span>p<span class="token operator">></span>couleur<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<h2>UseEffect</h2>
-<h3>Utilité</h3>
+<h1>UseEffect</h1>
+<h2>Utilité</h2>
 <p><code class="language-text">UseEffect</code>(est un hook permettant de dire à React ce que ce composant doit faire après son rendu initial.</p>
 <p>Il compense les lifecyle methodes <code class="language-text">componentDidMount</code>( ), <code class="language-text">componentWillUnmount</code>( ) et <code class="language-text">componentDidUpdate</code>( ) qui permettent de gérer des side effect (requête ajax, logging, modif du DOM, gestion d’event listeners etc.).</p>
 <p><code class="language-text">UseEffect</code> est <strong>placé à l’intérieur du composant</strong> de façon à avoir accès aux <strong>states</strong> et <strong>props</strong> (scope de la fonction, closures).</p>
-<h3>Usage</h3>
+<h2>Usage</h2>
 <p><code class="language-text">UseEffect</code> est exécuté par défaut après chaque mount (et donc aussi après chaque re-render &#x3C;=> unmount puis mount).</p>
 <p>On peut utiliser <code class="language-text">UseEffect</code> plusieurs fois dans un même composant pour la séparer des responsabilités (<a href="https://blog.behrouze.com/principes-solid-programmation-orientee-objet/#Single_Responsibility_Principle">SRP</a>) et contrôler leurs exécutions vis à vis des states dont dépendent chaque UseEffect.</p>
-<h3>Re-rendu</h3>
+<h2>Re-rendu</h2>
 <p>Pour éviter l’exécution systématique du side effect, il faut passer un 2ème argument optionnel, qui est un tableau de dépendances avec les states dont dépends l’éxécution de la fonction.<br>
 Pour un <em>re-rendu unique indépendant d’un state</em>, il suffit de passer un tableau vide.</p>
-<h3>Nettoyage à l’unmount</h3>
+<h2>Nettoyage à l’unmount</h2>
 <p>Lorsqu’un composant est démonté, il peut être utile d’avoir une phase de <strong>nettoyage</strong> équivalente au componentWillUnmount( ), nous permettant par ex de supprimer les enventListeners pour éviter les fuites mémoires, il est possible de <strong>retourner une fonction au sein de l’effet</strong>.</p>
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> useState<span class="token punctuation">,</span> useEffect <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
 
@@ -43,9 +43,9 @@ Pour un <em>re-rendu unique indépendant d’un state</em>, il suffit de passer 
     window<span class="token punctuation">.</span>title <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">La nouvelle tendance est </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>couleur<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>couleur<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre></div>
-<h2>UseContext</h2>
+<h1>UseContext</h1>
 <p>React dispose d’un hook dédié à la consommation du context permettant de partager de la data dans une arborescence complète.</p>
-<h2>Global</h2>
+<h1>Global</h1>
 <p>Les hooks doivent être utilisés tout <a href="https://reactjs.org/docs/hooks-rules.html#only-call-hooks-at-the-top-level">en haut de la fonction</a> et pas dans un bloc if, for ou autre.</p></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 10/11/20<!-- --> </span><span>, <!-- -->maj le 25/01/22<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
   
@@ -62,4 +62,4 @@ Pour un <em>re-rendu unique indépendant d’un state</em>, il suffit de passer 
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/react-hooks";window.___webpackCompilationHash="f7aaefc60b5fd3e3da51";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/react-hooks";window.___webpackCompilationHash="30f6ddd065efe5d16217";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>

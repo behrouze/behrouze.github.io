@@ -5,43 +5,43 @@
 Il permet une prise en charge de <strong>LUKS</strong> (« Linux Unified Key Setup »), le <em>standard</em> associé au noyau Linux pour le chiffrement de disque.</p>
 <p>packages.debian.org</p>
 </blockquote>
-<h2>Identifier le device de sa clé USB</h2>
+<h1>Identifier le device de sa clé USB</h1>
 <p>Il faut tout d’abord <em>identifier</em> la clé USB qui nous intéresse, avant d’éventuellement la <em>partitionner</em> pour enfin l’<em>encrypter</em> et la <em>formater</em>.<br>
 Voici plusieurs 3 méthodes :</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">lsblk -fs                           <span class="token comment"># list block devices chercher /dev/sd? pour les clé USB</span>
 <span class="token function">sudo</span> <span class="token function">cat</span> /var/log/messages <span class="token operator">|</span> <span class="token function">tail</span>   <span class="token comment"># fonctionne immédiatement après insertion de la clé USB</span>
 <span class="token function">sudo</span> <span class="token function">fdisk</span> /dev/sda1                <span class="token comment"># puis tapper p (infos de partitions) puis partitionner la clé</span></code></pre></div>
-<h2>Crypter la clé USB</h2>
+<h1>Crypter la clé USB</h1>
 <p>On va utiliser pour le cryptage/décryptage, un outil dénommé <code class="language-text">cryptsetup</code> avec LUKS (Linux Unified Key Setup).</p>
-<h3>Pré-requis</h3>
+<h2>Pré-requis</h2>
 <p>Il faut tout d’abord disposer des modules noyaux suivants <code class="language-text">dm-crypt</code> <code class="language-text">sha256</code> <code class="language-text">aes</code></p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> modprobe dm-crypt sha256 aes         <span class="token comment"># chargement des modules nécessaires</span>
 <span class="token function">sudo</span> lsmod                                <span class="token comment"># vérifier qu'ils sont bien chargés</span>
 <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> cryptsetup</code></pre></div>
-<h3>Crypter le device</h3>
+<h2>Crypter le device</h2>
 <p>En considérant ci-dessous la clé USB est identifiée en tant que <em>/dev/sda1</em> nous allons encrypter la partition avec la commande <code class="language-text">cryptsetup luksFormat</code>.<br>
 <em>Attention bien identifier votre device au risque de perdre le contenu de cette partition</em></p>
 <p>Cet opération va nous demander une passphrase (ou mot de passe) qu’il ne faudra pas perdre ! et il est possible de</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> cryptsetup -y luksFormat /dev/sdaXX -c aes -s <span class="token number">256</span> -h sha256 <span class="token comment"># va nous demander 2 fois une passphrase secrète qui nous servira de clé privée</span></code></pre></div>
-<h3>Monter/démonter la partition cryptée</h3>
+<h2>Monter/démonter la partition cryptée</h2>
 <p>Le montage et démontage de la partition cryptée s’effectue au moyen des commandes <code class="language-text">cryptsetup luksOpen</code> et <code class="language-text">cryptsetup luksClose</code>. Une fois décryptée la partition devra être montée classiquement via un mount, il faut donc garder à l’esprit qu’il faut <strong>effectuer 2 sortes de montages/démontages</strong>.</p>
-<h4>Formatage et 1er montage</h4>
+<h3>Formatage et 1er montage</h3>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> cryptsetup luksOpen /dev/sda1 secure <span class="token comment"># va créer /dev/mapper/secure</span>
 <span class="token function">sudo</span> <span class="token function">mkfs</span> -t ext4 -m <span class="token number">1</span> /dev/mapper/secure <span class="token comment"># formattage en ext4</span>
 <span class="token function">sudo</span> <span class="token function">mkdir</span> /media/macleusb
 <span class="token function">sudo</span> <span class="token function">mount</span> /dev/mapper/secure /media/macleusb
 <span class="token function">sudo</span> <span class="token function">chown</span> xxx:xxx /media/macleusb        <span class="token comment"># si la clé reste connectée</span></code></pre></div>
 <p>à partir de là nous avons la clé cryptée montée.</p>
-<h4>Montage suivants</h4>
+<h3>Montage suivants</h3>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> cryptsetup luksOpen /dev/sda1 secure
 <span class="token function">sudo</span> <span class="token function">mount</span> /dev/mapper/secure /media/macleusb</code></pre></div>
-<h4>Démontage</h4>
+<h3>Démontage</h3>
 <p>avant de retirer la clé USB ne pas oublier de:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> <span class="token function">umount</span> /media/macleusb           <span class="token comment"># démontage du volume déchiffré</span>
 <span class="token function">sudo</span> cryptsetup luksClose secure <span class="token comment"># fermeture du volume chiffré</span>
 
 <span class="token function">lsof</span> /media/xxx                  <span class="token comment"># si le umount échoue, pour plus d'infos</span></code></pre></div>
-<h2>Liens</h2>
+<h1>Liens</h1>
 <ul>
 <li>doc <a href="https://gitlab.com/cryptsetup/cryptsetup/-/wikis/FrequentlyAskedQuestions">cryptsetup FAQ</a></li>
 </ul></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 01/03/20<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
@@ -60,4 +60,4 @@ Voici plusieurs 3 méthodes :</p>
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/crypter-cle-usb-linux";window.___webpackCompilationHash="f7aaefc60b5fd3e3da51";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/crypter-cle-usb-linux";window.___webpackCompilationHash="30f6ddd065efe5d16217";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>

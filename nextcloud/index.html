@@ -12,15 +12,15 @@
 <li>il faut gérer la partie serveur soi meme (installation, mises à jour de Nextcloud)</li>
 <li><strong>sécuriser</strong> notre infrastructure, faute de quoi on risquerait de s’exposer à la fuite de toutes nos données… 😱</li>
 </ul>
-<h2>Dropbox et Google Drive</h2>
+<h1>Dropbox et Google Drive</h1>
 <p>Les grands acteurs actuels fournissent des espaces de stockages gratuits qui comportent certaines limitations :</p>
 <ul>
 <li>Google drive nous offre (03/2020) <strong>15 Go</strong> <em>en version gratuite</em> mais ces <strong>15Go sont partagée</strong> ? entre les <strong>Gmail</strong>, les <strong>Google Photos</strong> et <strong>Drive</strong>… Et remplir cet espace partagé nous force à prendre l’abonnement pro immédiatement pour ne pas bloquer la réception de ses mails…</li>
 <li>Dropbox <a href="https://www.dropbox.com/plans">démarrent à 10€ par mois</a> pour <strong>2 To</strong> de stockage.</li>
 </ul>
 <p>Bien sur il existe de <a href="https://www.cloudwards.net/top-10-secure-dropbox-alternatives/">nombreuses alternatives à Nextcloud, Droptbox et Google Drive</a> fournissant des services de stockage, à choisir en fonction de ses exigences en terme de sécurité, fonctionnalité et tarifs.</p>
-<h2>Installation sous Linux</h2>
-<h3>Installer les pré-requis</h3>
+<h1>Installation sous Linux</h1>
+<h2>Installer les pré-requis</h2>
 <p>Il faut tout d’abord installer les <a href="https://docs.nextcloud.com/server/15/admin_manual/installation/system_requirements.html#server">outils nécessaire à l’exécution de Nextcloud</a>, à savoir notre <strong>serveur web Nginx</strong>, un <strong>préprocesseur PHP php-fpm</strong> (supporte max v7.3 pour Nextcloud 18) et des <strong>modules PHP</strong> nécessaires et une <strong>base de données</strong>, il faudra choisir entre SQLite (pour un usage personnel), MariaDB ou autres.</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> update <span class="token operator">&amp;&amp;</span> <span class="token function">apt</span> <span class="token function">install</span> -y <span class="token punctuation">\</span>
 	<span class="token function">curl</span> <span class="token punctuation">\</span>
@@ -46,17 +46,17 @@
 	php-imagick <span class="token punctuation">\</span>
 	php7.3-mysql <span class="token punctuation">\</span>
 	php-apcu <span class="token punctuation">\</span></code></pre></div>
-<h3>Récupérer les fichiers à installer de Nextcloud</h3>
+<h2>Récupérer les fichiers à installer de Nextcloud</h2>
 <p>Il faut ensuite récupérer l’archive de la dernière version disponible de Nextcloud (ex ici: nextcloud-18.0.2.tar.bz2) et la décompresser.</p>
 <div class="gatsby-highlight" data-language="bash"><pre class="language-bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /tmp
 <span class="token function">curl</span> https://download.nextcloud.com/server/releases/nextcloud-18.0.2.tar.bz2 -o nextcloud-18.0.2.tar.bz2
 <span class="token function">sudo</span> -u www-data <span class="token function">tar</span> xvjf nextcloud-18.0.3.tar.bz2 -C /var/www</code></pre></div>
-<h2>Installation et configuration via occ</h2>
+<h1>Installation et configuration via occ</h1>
 <p>Nextcloud nous met à disposition un <a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/occ_command.html#maintenance-commands">maintenance de notre installation Nextcloud</a>.</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token builtin class-name">cd</span> /var/www/nextcloud/
 <span class="token function">sudo</span> -u www-data php occ list <span class="token comment"># help</span>
 <span class="token function">sudo</span> -u www-data php occ maintenance:install --database <span class="token string">"mysql"</span> --database-name <span class="token string">"nextcloud"</span> --database-user <span class="token string">"root"</span> --database-pass <span class="token string">"password"</span> --admin-user <span class="token string">"admin"</span> --admin-pass <span class="token string">"password"</span></code></pre></div>
-<h3>Configuration de php-fpm</h3>
+<h2>Configuration de php-fpm</h2>
 <p>J’utilise exclusivement des Nginx et non des Apaches en tant que serveurs web ou reverse proxies, pour pouvoir processer du PHP il faut donc une installation fonctionnelle de php-fpm:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token comment"># décommenter les lignes suivantes dans /etc/php/7.3/fpm/pool.d/www.conf</span>
 env<span class="token punctuation">[</span><span class="token environment constant">HOSTNAME</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token environment constant">$HOSTNAME</span>
@@ -101,17 +101,17 @@ POOL_CONF</span>
 
 <span class="token comment"># si pb de version PHP:</span>
 <span class="token function">vi</span> lib/versioncheck.php <span class="token comment"># et modifier le if..</span></code></pre></div>
-<h3>Permissions sur le système de fichiers</h3>
+<h2>Permissions sur le système de fichiers</h2>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> <span class="token function">chown</span> -R www-data:www-data nextcloud
 <span class="token function">sudo</span> <span class="token function">find</span> nextcloud/ -type d -exec <span class="token function">chmod</span> <span class="token number">750</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
 <span class="token function">sudo</span> <span class="token function">find</span> nextcloud/ -type f -exec <span class="token function">chmod</span> <span class="token number">640</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span></code></pre></div>
 <p>Pour un upgrade à la mano de son installation <a href="https://docs.nextcloud.com/server/18/admin_manual/maintenance/manual_upgrade.html?highlight=upgrade">utiliser cette doc</a>.</p>
-<h2>Mises à jour</h2>
+<h1>Mises à jour</h1>
 <p>Les mises à jour peuvent être effectuées depuis l’interface d’admin mais aussi avec la command <code class="language-text">occ</code>:</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> -u www-data php7.3 occ update:check</code></pre></div>
 <p><em>La commande précédente (<code class="language-text">occ update</code>) retourne ce type d’infos:</em><br>
 <em>Nextcloud 18.0.3 is available. Get more information on how to update at</em></p>
-<h3>Mise à jour de la version de Nextcloud</h3>
+<h2>Mise à jour de la version de Nextcloud</h2>
 <p>La mise à jour peut être effectuée manuellement en suivant la <a href="https://docs.nextcloud.com/server/18/admin_manual/maintenance/manual_upgrade.html">procédure</a> ou en utilisant l’interface d’admin:</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -144,7 +144,7 @@ POOL_CONF</span>
   </a>
     </span></p>
 <p>Process de mise à jour de Nextcloud via l’interface d’admin</p>
-<h3>Mise à jour d’applications Nextcloud</h3>
+<h2>Mise à jour d’applications Nextcloud</h2>
 <p>Se connecter en <em>admin</em> et depuis le <em>menu</em> apparaissant lorsqu’on clique sur l’<em>icône du profile</em> (tout en haut à droite) et aller dans les applications:</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -178,7 +178,7 @@ POOL_CONF</span>
   </a>
     </span></p>
 <p>Mise à jour d’une application Nextcloud depuis l’interface d’admin</p>
-<h2>Sécurité</h2>
+<h1>Sécurité</h1>
 <p>Il faut garder en tête que tout serveur web mis en ligne est soumis à des attaques en permanence, c’est pourquoi si vous souhaitez hébergé votre propre Nextcloud, il va falloir mettre en place quelques protections, à commencer par la mise à jour permanente de tous les composants de votre installation.</p>
 <p>Ensuite Nextcloud nous met à disposition un scanner de vulnérabilités sur</p>
 <p><span
@@ -214,30 +214,30 @@ POOL_CONF</span>
   </a>
     </span></p>
 <p>scan.nextcloud.com</p>
-<h2>Troubleshooting</h2>
-<h3>Limite de mémoire PHP est inférieure à la valeur recommandée de 512Mo</h3>
+<h1>Troubleshooting</h1>
+<h2>Limite de mémoire PHP est inférieure à la valeur recommandée de 512Mo</h2>
 <p>Si vous recevez le message <em>La limite de mémoire PHP est inférieure à la valeur recommandée de 512Mo</em>, il suffit de modifier la ligne :</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token comment"># éditer le fichier /etc/php/7.3/fpm/pool.d/www.conf</span>
 php_admin_value<span class="token punctuation">[</span>memory_limit<span class="token punctuation">]</span> <span class="token operator">=</span> 512M</code></pre></div>
 <p>puis redémarrer le service php-fpm :</p>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> systemctl restart php7.3-fpm</code></pre></div>
-<h3>Upstream sent too big header</h3>
+<h2>Upstream sent too big header</h2>
 <p>Si vous trouvez dans vos logs d’erreur Nginx un message du type <em>upstream sent too big header while reading response header from upstream</em>, c’est au niveau de la conf Nginx qu’il faut agir.<br>
 Ajouter dans votre directive server : <code class="language-text">fastcgi_buffer_size 32k;</code><br>
 Et pour comprendre et bien dimensionner ce buffer <a href="https://markshust.com/2020/01/02/resolving-upstream-sent-too-big-header-error-nginx/">aussi</a>.</p>
-<h2>Liens</h2>
+<h1>Liens</h1>
 <ul>
 <li><a href="https://ma.ttias.be/a-better-way-to-run-php-fpm/">optimisation de sa config php-fpm</a></li>
 </ul>
-<h2>OCC</h2>
+<h1>OCC</h1>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">sudo</span> -u www-data php7.3 occ -v
 Partage de fichiers <span class="token number">17.0</span>.2
 
 <span class="token comment"># OCC</span>
-<span class="token comment">## Usage:</span>
+<span class="token comment"># Usage:</span>
   <span class="token builtin class-name">command</span> <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token punctuation">[</span>arguments<span class="token punctuation">]</span>
 
-<span class="token comment">## Options:</span>
+<span class="token comment"># Options:</span>
   -h, --help            Display this <span class="token builtin class-name">help</span> message
   -q, --quiet           Do not output any message
   -V, --version         Display this application version
@@ -391,4 +391,4 @@ Available commands:
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/nextcloud";window.___webpackCompilationHash="f7aaefc60b5fd3e3da51";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/nextcloud";window.___webpackCompilationHash="30f6ddd065efe5d16217";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>

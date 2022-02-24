@@ -36,10 +36,38 @@
   </a>
     </span></p>
 <p>schéma fonctionnement PAM</p>
-<h2>Configuration</h2>
+<h1>Configuration</h1>
 <p>Les <strong>fichiers de configuration de PAM</strong> se trouvent dans <code class="language-text">/etc/pam.d</code> (et un fichier <code class="language-text">/etc/pam.conf</code> en cas d’absence du dossier pam.d).<br>
 Chaque application cliente du service PAM y a son propre fichier:</p>
-<p><img src="images/PAM-config.png" alt=""></p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 270px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/81bf23497af79b051ccc2c1b66a2a9f0/01bf6/PAM-config.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 141.78403755868544%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAABh2p9gAAAACXBIWXMAAAsTAAALEwEAmpwYAAACxElEQVRIx6WVCXPaSBCF9f9/1obdJUIHuu8LodPg4NjEASR9W8gOZQybtdmu6tKoq+vNe9PTPYKUOmRkLA8lRVcSdCFJn5P8TEn3KemqIF8cyIstUbwlL3rK8pG6HUiSkrapub9fE0YxwzAgTAMD97tN9JSxICcbcoqhJh4SWloedluaBtoVVA1kOWweXn3zg83mG9vtE+v7bxxNmM0sQsOmXDZjgAMwvCxP33Fxzc9tZCjKFpqmoKgyk8kf6KbBwEDXd/RDPyZddy5iI0NJdbD0OWVVc81+JX7UBHnu4tomhmFxv16zumupqoo8y2jq+gT6UWBBmjuYpsH0L5EoDAkDH8PQcRyH1Wr1ecAjQ9s2mYky+WJBkiY4lsnz825M6Pv+U9IFRfewLRNJVMjSbGRmOzaSJKHpOm3bnoCvFef9ZoI0d0fJX6cSiywjDANMy8bzfNI0+09G75kLomyiaSqTL38TRxG+5yLOJDRNJwoj7tqW7FigqmJZFCwWGXVZUFU1q/X6kuFRsmFoqMqLvKIoRmZFUVKVJcUyJwxjymVBHMdEYTDG8nxJWVaXgKoRkCYR7d0dt9iFZFkL8Vwb23Louv5UgPc+vF0P/alIFwxlzUORZti2i2Ua1E17dvfeV/Na/Izh7LX1dMOgbRuetk+vicOn224E/KpYRIGP7wc8P/98w+SmI0X4MlWxTY3pdDpe6HNpNwI65rF3I4o8o2nal0k33ChZMXziwMfzvNEPXXfT2DoB6k5C5Ls4toVlmnx/fGS3vx1U0N2Y0HPQDZ0kidlsHtj+2N0OqOguc1VGFCW6V7n/S7JqeOhzFT8IzsbUzQyPE7tpag6Hw2+748OAomISR+FYjI8+UNc2O716c9NHm8vjQN3v9yff7Xa/Zfg2djYcZqpFHEcYus6fkwlBECJLM+Ik+VfAX//HTY9H9ZbhP51hbIR4Gp9+AAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="PAM config"
+        title="PAM config"
+        src="/static/81bf23497af79b051ccc2c1b66a2a9f0/01bf6/PAM-config.png"
+        srcset="/static/81bf23497af79b051ccc2c1b66a2a9f0/3cb16/PAM-config.png 213w,
+/static/81bf23497af79b051ccc2c1b66a2a9f0/01bf6/PAM-config.png 270w"
+        sizes="(max-width: 270px) 100vw, 270px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
 <p>liste des fichiers de configuration PAM dans /etc/pam.d</p>
 <p>Ces fichiers de configuration sont composés d’une <strong>liste de directives</strong>, chaque <strong>directive</strong> est composée de:</p>
 <ul>
@@ -53,64 +81,93 @@ Chaque application cliente du service PAM y a son propre fichier:</p>
 <li>du <strong>nom</strong> du module (pam_xxx.so)</li>
 <li>et d’un certain nombres d’<strong>arguments</strong> propre au module</li>
 </ul>
-<p><img src="images/PAM-config-app.png" alt="détail fichier dans pam.d"></p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 695px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/4cb4ffef5fb72d2a93dc299ff2048a75/83b75/PAM-config-app.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 23.474178403755868%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA7klEQVQY03WQ3W6DMAyFef8n6y6p1hbSkCYQAuSPUmmtSBBnSqR1F9MsfcqRnWPZLrpXh7M+o2l7UOogWo/T6QJjDMZhAKnJm0EpzLPHtm1Ise/7H4rlccfx8wjZK8S4IYSIdV2zwVmDsixxu3E8ny/E+Fv7L4opalw9BesUevmFTs6oawohOATnqC4VDocPTFpnQ2qaCCG89Q9p8uIxLxCMo7lSCN7gSmpUVQXWMFhjoJSClBJaaxitMY5j1tM0wVqbT5NIelkWFMZotJ3IN0pGSikIIWCMZaOzLn+evc9vIuW995nUxDmHNYS88jc6Snh2m9KMxgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="détail fichier dans pam.d"
+        title="détail fichier dans pam.d"
+        src="/static/4cb4ffef5fb72d2a93dc299ff2048a75/83b75/PAM-config-app.png"
+        srcset="/static/4cb4ffef5fb72d2a93dc299ff2048a75/3cb16/PAM-config-app.png 213w,
+/static/4cb4ffef5fb72d2a93dc299ff2048a75/2fbbf/PAM-config-app.png 425w,
+/static/4cb4ffef5fb72d2a93dc299ff2048a75/83b75/PAM-config-app.png 695w"
+        sizes="(max-width: 695px) 100vw, 695px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+        decoding="async"
+      />
+  </a>
+    </span></p>
 <p>extraits de fichiers de configuration PAM</p>
 <p>Ces directives sont exécutées séquentiellement (sauf en cas de flag complexe), et chacune retourne success ou failure</p>
-<h2>Bonus</h2>
-<h3>Aide man pages</h3>
+<h1>Bonus</h1>
+<h2>Aide man pages</h2>
 <ul>
 <li>man pam.d : aide générale sur PAM</li>
 <li>man pam_unix : nom du module souhaité sans l’extension .so (pour shared object)</li>
 <li>man pam-auth-update : outil de configuration de la configuration de PAM</li>
 </ul>
-<h3>Liste des modules PAM</h3>
+<h2>Liste des modules PAM</h2>
 <p>voici une liste non exhaustive des modules PAM disponible dans une distribution raspbian:</p>
-<p>pam_access.so<br>
-pam_chksshpwd.so<br>
-pam_cifscreds.so<br>
-pam_debug.so<br>
-pam_deny.so<br>
-pam_echo.so<br>
-pam_env.so<br>
-pam_exec.so<br>
-pam_faildelay.so<br>
-pam_filter.so<br>
-pam_ftp.so<br>
-pam_group.so<br>
-pam_issue.so<br>
-pam_keyinit.so<br>
-pam_lastlog.so<br>
-pam_limits.so<br>
-pam_listfile.so<br>
-pam_localuser.so<br>
-pam_loginuid.so<br>
-pam_mail.so<br>
-pam_mkhomedir.so<br>
-pam_motd.so<br>
-pam_namespace.so<br>
-pam_nologin.so<br>
-pam_permit.so<br>
-pam_pwhistory.so<br>
-pam_rhosts.so<br>
-pam_rootok.so<br>
-pam_securetty.so<br>
-pam_selinux.so<br>
-pam_sepermit.so<br>
-pam_shells.so<br>
-pam_stress.so<br>
-pam_succeed_if.so<br>
-pam_systemd.so<br>
-pam_tally2.so<br>
-pam_tally.so<br>
-pam_time.so<br>
-pam_timestamp.so<br>
-pam_tty_audit.so<br>
-pam_umask.so<br>
-pam_unix.so<br>
-pam_userdb.so<br>
-pam_warn.so<br>
-pam_wheel.so<br>
-pam_xauth.so</p></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 22/03/20<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">pam_access.so  
+pam_chksshpwd.so  
+pam_cifscreds.so  
+pam_debug.so  
+pam_deny.so  
+pam_echo.so  
+pam_env.so  
+pam_exec.so  
+pam_faildelay.so  
+pam_filter.so  
+pam_ftp.so  
+pam_group.so  
+pam_issue.so  
+pam_keyinit.so  
+pam_lastlog.so  
+pam_limits.so  
+pam_listfile.so  
+pam_localuser.so  
+pam_loginuid.so  
+pam_mail.so  
+pam_mkhomedir.so  
+pam_motd.so  
+pam_namespace.so  
+pam_nologin.so  
+pam_permit.so  
+pam_pwhistory.so  
+pam_rhosts.so  
+pam_rootok.so  
+pam_securetty.so  
+pam_selinux.so  
+pam_sepermit.so  
+pam_shells.so  
+pam_stress.so  
+pam_succeed_if.so  
+pam_systemd.so  
+pam_tally2.so  
+pam_tally.so  
+pam_time.so  
+pam_timestamp.so  
+pam_tty_audit.so  
+pam_umask.so  
+pam_unix.so  
+pam_userdb.so  
+pam_warn.so  
+pam_wheel.so  
+pam_xauth.so</code></pre></div></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:#90a4ae;}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-iw22na"><div><span>rédigé le 22/03/20<!-- --> </span>par <!-- -->Behrouze</div></i></div></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></main></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
   
   if(true) {
@@ -126,4 +183,4 @@ pam_xauth.so</p></div><style data-emotion="css iw22na">.css-iw22na{margin:0;font
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/pam-linux";window.___webpackCompilationHash="f7aaefc60b5fd3e3da51";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/pam-linux";window.___webpackCompilationHash="30f6ddd065efe5d16217";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-2522e8ee87ba4c5fd227.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-92ce5a38e9b81cb2e7a7.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-695c0bd6e23b7d2e72e4.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-c89d5ff349456c1046fa.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-eef92a686ff32c539de6.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-2522e8ee87ba4c5fd227.js" async=""></script><script src="/framework-1b09f98392e3a984ace3.js" async=""></script><script src="/webpack-runtime-f278e9bfd28c4d6be123.js" async=""></script></body></html>
