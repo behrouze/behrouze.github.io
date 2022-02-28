@@ -40,65 +40,131 @@
         </picture>
   </a>
     </span></h1>
-<p><strong>Heroku</strong> est un Paas (service en ligne)  qui nous permet de <strong>déployer, gérer et faire tourner</strong> des <strong>applications</strong> (Node.js, Python, Go, Scala, Ruby, Clojure, Java et PHP) sur des containers <strong>Linux</strong> appelés <a href="https://devcenter.heroku.com/articles/dynos"><strong>dynos</strong></a> (infrastructure Heroku) et offre un <a href="https://dashboard.heroku.com">Dashboard d'administration</a> plutôt bien fait.</p>
-<p>Une <strong>application au sens Heroku</strong> est un <strong>ensemble de fichiers source</strong> ainsi qu'un <strong>fichier de dépendances</strong> (package.json pour du Node) et un <strong><a href="https://devcenter.heroku.com/articles/procfile">Procfile</a></strong> (qui défini les commandes pour lancers les différentes instances des composants de votre application).</p>
-<p>La <strong>méthode de déploiement</strong> préconisée sur l'infra Heroku est <strong>Git</strong> bien qu'il soit possible d'utiliser leurs <a href="https://devcenter.heroku.com/articles/build-and-release-using-the-api">API</a> ou l'<a href="https://devcenter.heroku.com/articles/github-integration">intégration GitHub</a>.</p>
-<h2>Terminologie</h2>
+<p><strong>Heroku</strong> est un Paas (service en ligne)  qui nous permet de <strong>déployer, gérer et faire tourner</strong> des <strong>applications</strong> (Node.js, Python, Go, Scala, Ruby, Clojure, Java et PHP) sur des containers <strong>Linux</strong> appelés <a href="https://devcenter.heroku.com/articles/dynos"><strong>dynos</strong></a> (infrastructure Heroku) et offre un <a href="https://dashboard.heroku.com">Dashboard d’administration</a> plutôt bien fait.</p>
+<p>Une <strong>application au sens Heroku</strong> est un <strong>ensemble de fichiers source</strong> ainsi qu’un <strong>fichier de dépendances</strong> (package.json pour du Node) et un <strong><a href="https://devcenter.heroku.com/articles/procfile">Procfile</a></strong> (qui défini les commandes pour lancer les différentes instances des composants de votre application).</p>
+<p>La <strong>méthode de déploiement</strong> préconisée sur l’infra Heroku est la CLI Heroku avec <strong>Git</strong> bien qu’il soit possible d’utiliser leurs <a href="https://devcenter.heroku.com/articles/build-and-release-using-the-api">API</a> ou l’<a href="https://devcenter.heroku.com/articles/github-integration">intégration GitHub</a>.</p>
+<h1>Terminologie</h1>
 <ul>
-<li>les <strong><a href="https://devcenter.heroku.com/articles/dynos">Dynos</a></strong> sont des <strong>containers Unix virtualisés isolés</strong>, qui fournissent l'environnement requis pour lancer une application</li>
+<li>les <strong><a href="https://devcenter.heroku.com/articles/dynos">Dynos</a></strong> sont des <strong>containers Unix virtualisés isolés</strong>, qui fournissent l’environnement requis pour lancer une application</li>
 <li>un <strong><a href="https://devcenter.heroku.com/articles/slug-compiler">Slug</a></strong> est une <strong>archive compressée</strong> regroupant les <strong>sources</strong>, les <strong>dépendances</strong>, le <strong>runtime</strong> et les éléments <strong>compilés</strong> par le système de build</li>
 </ul>
-<h2>Fonctionnement</h2>
-<h3>Pré requis</h3>
+<h1>Fonctionnement</h1>
+<h2>Pré requis</h2>
 <p>Pour déployer une <em>application NodeJs sur Heroku</em>, il faut disposer en local de :</p>
 <ol>
 <li><strong>Nodejs</strong> et <strong>npm</strong></li>
 <li>client <strong>git</strong></li>
-<li>
-CLI Heroku (installer sous Windows via <a href="/chocolatey" title="chocolatey">chocolatey</a> : choco install heroku-cli /y ou sous linux avec snap : sudo snap install heroku --classic )
+<li><strong>CLI Heroku</strong> à <a href="https://devcenter.heroku.com/articles/heroku-cli#download-and-install">installer</a> :
+<ul>
+<li>sous <em>Windows</em> via <a href="http://raspi3/chocolatey-homebrew-packages-managers-windows-macos/">choco</a> : <code class="language-text">choco install heroku-cli /y</code></li>
+<li>sous <em>Ubuntu</em> avec <a href="https://snapcraft.io/">snap</a> : <code class="language-text">sudo snap install heroku --classic</code></li>
+<li>sous <em>Mac</em> avec <a href="http://raspi3/chocolatey/#brew">brew</a> : <code class="language-text">brew tap heroku/brew &amp;&amp; brew install heroku</code></li>
+<li>sous <em>Linux</em>: <code class="language-text">curl https://cli-assets.heroku.com/install.sh | sh</code></li>
+</ul>
 </li>
-<li><em>un compte</em> sur <a href="https://signup.heroku.com/dc">Heroku.com</a></li>
 </ol>
-<h3>Déploiement</h3>
-<p>Exécuter les commandes suivantes une fois un nouveau shell ouvert dans le dossier de votre projet:</p>
-<p>heroku login # demande les login/pass de votre compte heroku.com
-heroku create nomDeVotreAppli --region eu # cré un projet nomDeVotreAppli sur heroku.com &#x26; le git remote associé nommé heroku
-git push heroku master # déploie les sources et lance le process de Build sur heroku.com</p>
-<h3>Vie de la dyno</h3>
-<p>Il est possible de surveiller l'état de nos dynos grâces aux commandes suivantes :</p>
-<p>heroku info # liste toutes les caractéristiques de la dyno
-heroku logs --tail # suit les logs (équivalent à un tail -f en bash)
-heroku ps # affiche le nombre et l'état des dynos (runnig, crash etc)
-heroku ps:scale web=3 # augmente le nombre de dynos pour cette instance à 3
-heroku open # ouvre l'URL de votre appli hébergé dans votre Navigateur !
-heroku git:clone -a nomDeVotreAppli # récupère les sources du code déployé</p>
-<p>Pour <strong>lancer l'appli web en local</strong> et vérifier notre <strong>procfile</strong>, heroku nous propose la commande : heroku local web</p>
-<p>Nous avons également la possibilité d'accéder à un shell sur notre instance via la commande : heroku run bash</p>
-<h3>RAM</h3>
-<p>La mémoire étant limitée (surtout pour les plans gratuit et hobbie 512Mo) il faut pouvoir surveiller la <a href="https://devcenter.heroku.com/articles/optimizing-dyno-usage#measuring">consommation mémoire</a> de sa dyno, il est possible d'utiliser une <a href="https://devcenter.heroku.com/categories/labs">Heroku Lab</a> (fonctionnalité expérimentale) qui est le log-runtime-metrics, qui comme son nom l'indique va logger visible dans PaperTrail ou les logs heroku la consommation mémoire :</p>
-<p>heroku labs:enable log-runtime-metrics # installe la fonctionnalité
-heroku labs:disable log-runtime-metrics # commande pour la désinstaller
-heroku restart</p>
-<h2>Variables d'environnements</h2>
-<h3>Local</h3>
-<p>En <strong>local</strong>, heroku nous mets à disposition le <a href="https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables"><strong>fichier .env</strong></a> pour y positionner les variables d'environnement souhaités.</p>
-<h3><strong>Sur notre dynos</strong></h3>
-<p>Un set de commandes dédiés aux créations/suppressions de variables d'environnement sont disponibles pour nos instances Heroku :</p>
-<p>heroku config:set NODE_ENV="production" # pour setter la variable d'environnement NODE_ENV
-heroku config # visualiser les variables d'environnement de la dyno
-#=== monApp Config Vars
-#NODE_ENV: production
-#NODE_PORT: 8080
-#PAPERTRAIL_API_TOKEN: xxxxxxxxxxxxxxx
-heroku config:unset NODE_PORT # pour supprimer la variable</p>
-<h2>Addons</h2>
-<p>Heroku propose un système d'<a href="https://elements.heroku.com/addons">add-ons</a>, permettant d'outiller notre environnement, avec par exemple un <a href="https://devcenter.heroku.com/articles/papertrail">PaperTrail</a> :</p>
-<p>heroku addons:create papertrail # ajoute l'addon PaperTrail
-heroku addons # liste les addons 'installés' sur notre dyno
-heroku addons:open papertrail # ouvre la page web de Papertrail</p>
-<p>Les addons installés sont également accessible aussi depuis l'onglet resources de notre dyno.</p>
-<h2>Addons intéressants</h2>
-<p><a href="https://devcenter.heroku.com/articles/papertrail">PaperTrail</a> : centralise les logs de nos différentes dynos ou apps et propose une WebUI permettant de filtrer les évenements</p>
+<h2>Déploiement</h2>
+<h3>Pour une nouvelle app Heroku</h3>
+<p>Exécuter les commandes suivantes une fois un nouveau shell ouvert dans le dossier de votre projet, en utilisant la <a href="https://devcenter.heroku.com/articles/heroku-cli#useful-cli-plugins">CLI Heroku</a> :</p>
+<p>heroku login                                # demande les login/pass de votre compte heroku
+heroku create nomDeVotreAppli --region eu   # cré un projet nomDeVotreAppli sur heroku et le git remote associé
+git push heroku master                      # déploie les sources et lance le process de Build sur heroku</p>
+<h3>Pour une app Heroku existante</h3>
+<p>Si l’on souhaite reprendre une application existante sur Heroku et pousser nos sources (en local sous git), il faudra ajouter le git remote associé à l’application Heroku via un <code class="language-text">heroku git:remote -a nomDeVotreAppli</code><br>
+et vérifier avec un <code class="language-text">git remote -v</code></p>
+<h2>Vie de la dyno</h2>
+<p>Il est possible de surveiller l’état de nos dynos grâces aux commandes suivantes :</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">heroku info             <span class="token comment"># liste toutes les caractéristiques de la dyno</span>
+heroku logs --tail      <span class="token comment"># suit les logs (équivalent à un tail -f en bash)</span>
+heroku <span class="token function">ps</span>               <span class="token comment"># affiche le nombre et l'état des dynos (runnig, crash etc)</span>
+heroku ps:scale <span class="token assign-left variable">web</span><span class="token operator">=</span><span class="token number">3</span>   <span class="token comment"># augmente le nombre de dynos pour cette instance à 3</span>
+heroku <span class="token function">open</span>             <span class="token comment"># ouvre l'URL de votre appli hébergé dans votre Navigateur !</span>
+heroku git:clone -a nomDeVotreAppli  <span class="token comment"># récupère les sources du code déployé</span>
+heroku config:add <span class="token assign-left variable">TZ</span><span class="token operator">=</span><span class="token string">"Europe/Paris"</span>  <span class="token comment"># corrige le Timezone pour Paris 😀</span></code></pre></div>
+<p>Pour la modification de la Timezone (dans l’ex précédent « Euruope/Paris ») se référer à la base de données TimeZone (<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">tz database</a>).</p>
+<p>Pour <strong>lancer l’appli web en local</strong> et vérifier notre <strong>procfile</strong>, heroku nous propose la commande : <code class="language-text">heroku local web</code></p>
+<p>Nous avons également la possibilité d’accéder à un <strong>shell bash</strong> sur notre instance via la commande : <code class="language-text">heroku run bash</code></p>
+<h2>RAM</h2>
+<p>La mémoire étant limitée (surtout pour les plans gratuit et hobbie 512Mo) il faut pouvoir surveiller la <a href="https://devcenter.heroku.com/articles/optimizing-dyno-usage#measuring">consommation mémoire</a> de sa dyno, il est possible d’utiliser une <a href="https://devcenter.heroku.com/categories/labs">Heroku Lab</a> (fonctionnalité expérimentale) qui est le log-runtime-metrics, qui comme son nom l’indique va logger visible dans PaperTrail ou les logs heroku la consommation mémoire :</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">heroku labs:enable log-runtime-metrics   <span class="token comment"># installe la fonctionnalité</span>
+heroku labs:disable log-runtime-metrics  <span class="token comment"># commande pour la désinstaller</span>
+heroku restart</code></pre></div>
+<h1>Variables d’environnements</h1>
+<p>Les variables d’environnements peuvent être settées de différentes façon.</p>
+<h2>Local</h2>
+<p>En <strong>local</strong>, heroku nous mets à disposition le <a href="https://devcenter.heroku.com/articles/heroku-local#set-up-your-local-environment-variables"><strong>fichier .env</strong></a> pour y positionner les variables d’environnement souhaités.</p>
+<h2><strong>Sur notre dynos</strong></h2>
+<p>Un set de commandes dédiés aux créations/suppressions de variables d’environnement sont disponibles pour nos instances Heroku :</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">heroku config:set <span class="token assign-left variable">NODE_ENV</span><span class="token operator">=</span><span class="token string">"production"</span>   <span class="token comment"># pour setter la variable d'environnement NODE_ENV </span>
+heroku config                             <span class="token comment"># visualiser les variables d'environnement de la dyno</span>
+heroku config -a nom-app-heroku           <span class="token comment"># pour lister les vars de cette app spécifiquement</span>
+
+<span class="token comment">#=== monApp Config Vars</span>
+<span class="token comment">#NODE_ENV:             production</span>
+<span class="token comment">#NODE_PORT:            8080</span>
+<span class="token comment">#PAPERTRAIL_API_TOKEN: xxxxxxxxxxxxxxx</span>
+heroku config:unset NODE_PORT             <span class="token comment"># pour supprimer la variable</span></code></pre></div>
+<h2>Interface Web Heroku</h2>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 850px; box-shadow: 3px 5px 4px rgba(0,0,0,.1);margin:1rem;"
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/9496539ae957195b935cadf3406ce95a/2bef9/Heroku-Config-Vars-Environnement-1024x561.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 54.929577464788736%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABSElEQVQoz42SzVLDMAyE+/6vx5ULAxwKdeKkluX/j7HTQKFlwDM7XsXSaq34MB0dbg2kmInhgs5TJeWK+MhsBbt6pkWYF8GHhIZMSIV4hR4fvCZOb2emSTAv7zw/PGKeXlnNwnlecWfFOR1cXEA04Xy8QhpN3VmwVji01ogpEWJCNaCiqFeCV9QJai1yfEPmlWgttVZqbRta++L9e6kcoJFTGcH1apc9l0KKkWgMJQS6gdY2gZLLZ7xjOOxiPWFP7B0/C8d5IXs/muxnW169LzhQ23eHvSh3IUVPE8FM1JxvBG4Ee7E4jzELTjwiHudkm4tuYutpwb3PpNnS7ri6EfSqmNky2wXxivf6dZ1SKOopMUCrfzvc59H3n1fuKH1WncN4Z/U/DvOdv7U36G5TSoMfzYKqfmt41+FvCX1tbzQO3sV28d8EPwD+pmDfqps1PQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <picture>
+          <source
+              srcset="/static/9496539ae957195b935cadf3406ce95a/bc663/Heroku-Config-Vars-Environnement-1024x561.webp 213w,
+/static/9496539ae957195b935cadf3406ce95a/8dc4f/Heroku-Config-Vars-Environnement-1024x561.webp 425w,
+/static/9496539ae957195b935cadf3406ce95a/10237/Heroku-Config-Vars-Environnement-1024x561.webp 850w,
+/static/9496539ae957195b935cadf3406ce95a/a9a89/Heroku-Config-Vars-Environnement-1024x561.webp 1024w"
+              sizes="(max-width: 850px) 100vw, 850px"
+              type="image/webp"
+            />
+          <source
+            srcset="/static/9496539ae957195b935cadf3406ce95a/3cb16/Heroku-Config-Vars-Environnement-1024x561.png 213w,
+/static/9496539ae957195b935cadf3406ce95a/2fbbf/Heroku-Config-Vars-Environnement-1024x561.png 425w,
+/static/9496539ae957195b935cadf3406ce95a/ae694/Heroku-Config-Vars-Environnement-1024x561.png 850w,
+/static/9496539ae957195b935cadf3406ce95a/2bef9/Heroku-Config-Vars-Environnement-1024x561.png 1024w"
+            sizes="(max-width: 850px) 100vw, 850px"
+            type="image/png"
+          />
+          <img
+            class="gatsby-resp-image-image"
+            src="/static/9496539ae957195b935cadf3406ce95a/ae694/Heroku-Config-Vars-Environnement-1024x561.png"
+            alt="Heroku Environnement Vars"
+            title="Heroku Environnement Vars"
+            loading="lazy"
+            decoding="async"
+            style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+          />
+        </picture>
+  </a>
+    </span></p>
+<h1>Troubleshooting</h1>
+<p>J’ai été confronté à une impossibilité de démarrer mon projet (Nextjs/Node) sur Heroku, qui après un <code class="language-text">git push heroku</code> tentait d’effectuer le <code class="language-text">npm build</code> de mon <code class="language-text">package.json</code> plusieurs fois avant de tomber en timeout… et le <code class="language-text">heroku logs -t</code> me donnait :</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">State changed from starting to crashed
+Error R10 <span class="token punctuation">(</span>Boot <span class="token function">timeout</span><span class="token punctuation">)</span> -<span class="token operator">></span> Web process failed to <span class="token builtin class-name">bind</span> to <span class="token variable">$PORT</span> within <span class="token number">60</span> seconds of launch
+Stopping process with SIGKILL
+Process exited with status <span class="token number">137</span></code></pre></div>
+<p>La solution m’a été apportée par cet <a href="https://github.com/zeit/next.js/issues/198">issue Github</a> dans lequel il est question d’une entrée <code class="language-text">prestart</code> (entrée de <a href="https://docs.npmjs.com/misc/scripts">npm scripts</a>) qui permet d’<strong>exécuter une commande avant</strong> un <code class="language-text">npm start</code>, et en cherchant <a href="https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps">dans la doc Heroku</a> on trouve qu’il existe également 2 entrées scripts spécifique à Heroku <code class="language-text">heroku-prebuild</code> and <code class="language-text">heroku-postbuild</code> et un <a href="https://stackoverflow.com/questions/48364441/how-to-install-man-on-heroku">post SO sur la différence entre les prestart et heroku-prebuild</a>.<br>
+<code class="language-text">heroku-prebuild</code> m’a donc sauvé de ces erreurs et on peut y placer le build de NextJS sans limite de temps !</p>
+<h1>Addons</h1>
+<p>Heroku propose un système d’<a href="https://elements.heroku.com/addons">add-ons</a>, permettant d’outiller notre environnement, avec par exemple un <a href="https://devcenter.heroku.com/articles/papertrail">PaperTrail</a> :</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">heroku addons:create papertrail    <span class="token comment"># ajoute l'addon PaperTrail</span>
+heroku addons                      <span class="token comment"># liste les addons 'installés' sur notre dyno</span>
+heroku addons:open papertrail      <span class="token comment"># ouvre la page web de Papertrail</span></code></pre></div>
+<p>Les addons installés sont également accessible aussi depuis l’onglet ressources de notre dyno.</p>
+<h1>Addons intéressants</h1>
+<p>PaperTrail : centralise les logs de nos différentes dynos ou apps et propose une WebUI permettant de filtrer les évènements</p>
 <p><a href="https://elements.heroku.com/addons/librato">Librato</a> : permet de monitorer vos dynos et propose une interface sympa</p>
 <p><span
       class="gatsby-resp-image-wrapper"
@@ -149,7 +215,7 @@ heroku addons:open papertrail # ouvre la page web de Papertrail</p>
 <li><a href="https://devcenter.heroku.com/articles/how-heroku-works">Définitions et aperçu technique du fonctionnement de Heroku</a></li>
 <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Tuto Heroku NodeJs</a></li>
 <li>Un comparatif entre <a href="https://tuhrig.de/docker-vs-heroku/">Docker et Heroku</a></li>
-</ul></div><style data-emotion="css 4bwvtq">.css-4bwvtq{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;row-gap:0.3rem;margin:3rem 0 1rem;}.css-4bwvtq>:not(style)+:not(style){margin:0;margin-left:8px;}</style><div class="css-4bwvtq"><a style="text-decoration:none" href="/?tag=devops"><style data-emotion="css b41ts0">.css-b41ts0{font-family:"Roboto","Helvetica","Arial",sans-serif;font-size:0.8125rem;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;height:24px;color:rgba(0, 0, 0, 0.87);background-color:rgba(0, 0, 0, 0.08);border-radius:16px;white-space:nowrap;-webkit-transition:background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;cursor:default;outline:0;-webkit-text-decoration:none;text-decoration:none;border:0;padding:0;vertical-align:middle;box-sizing:border-box;background-color:transparent;border:1px solid #bdbdbd;cursor:pointer;}.css-b41ts0.Mui-disabled{opacity:0.38;pointer-events:none;}.css-b41ts0 .MuiChip-avatar{margin-left:5px;margin-right:-6px;width:24px;height:24px;color:#616161;font-size:0.75rem;}.css-b41ts0 .MuiChip-avatarColorPrimary{color:#fff;background-color:#1565c0;}.css-b41ts0 .MuiChip-avatarColorSecondary{color:#fff;background-color:#7b1fa2;}.css-b41ts0 .MuiChip-avatarSmall{margin-left:4px;margin-right:-4px;width:18px;height:18px;font-size:0.625rem;}.css-b41ts0 .MuiChip-icon{color:#616161;margin-left:4px;margin-right:-4px;font-size:18px;}.css-b41ts0 .MuiChip-deleteIcon{-webkit-tap-highlight-color:transparent;color:rgba(0, 0, 0, 0.26);font-size:16px;cursor:pointer;margin:0 5px 0 -6px;margin-right:4px;margin-left:-4px;}.css-b41ts0 .MuiChip-deleteIcon:hover{color:rgba(0, 0, 0, 0.4);}.css-b41ts0.MuiChip-clickable:hover{background-color:rgba(0, 0, 0, 0.04);}.css-b41ts0.Mui-focusVisible{background-color:rgba(0, 0, 0, 0.12);}.css-b41ts0 .MuiChip-avatar{margin-left:4px;}.css-b41ts0 .MuiChip-avatarSmall{margin-left:2px;}.css-b41ts0 .MuiChip-icon{margin-left:4px;}.css-b41ts0 .MuiChip-iconSmall{margin-left:2px;}.css-b41ts0 .MuiChip-deleteIcon{margin-right:5px;}.css-b41ts0 .MuiChip-deleteIconSmall{margin-right:3px;}</style><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><style data-emotion="css 1pjtbja">.css-1pjtbja{overflow:hidden;text-overflow:ellipsis;padding-left:8px;padding-right:8px;white-space:nowrap;}</style><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">devops</span></div></a><a style="text-decoration:none" href="/?tag=git"><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">git</span></div></a><a style="text-decoration:none" href="/?tag=linux"><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">linux</span></div></a><a style="text-decoration:none" href="/?tag=nodejs"><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">nodejs</span></div></a></div><style data-emotion="css y6ucz">.css-y6ucz{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:rgba(0, 0, 0, 0.38);}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-y6ucz"><div><span>rédigé le 23/10/18<!-- --> </span>par <!-- -->Behrouze</div></i></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
+</ul></div><style data-emotion="css 4bwvtq">.css-4bwvtq{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;-webkit-box-flex-wrap:wrap;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap;row-gap:0.3rem;margin:3rem 0 1rem;}.css-4bwvtq>:not(style)+:not(style){margin:0;margin-left:8px;}</style><div class="css-4bwvtq"><a style="text-decoration:none" href="/?tag=devops"><style data-emotion="css b41ts0">.css-b41ts0{font-family:"Roboto","Helvetica","Arial",sans-serif;font-size:0.8125rem;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;height:24px;color:rgba(0, 0, 0, 0.87);background-color:rgba(0, 0, 0, 0.08);border-radius:16px;white-space:nowrap;-webkit-transition:background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;transition:background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;cursor:default;outline:0;-webkit-text-decoration:none;text-decoration:none;border:0;padding:0;vertical-align:middle;box-sizing:border-box;background-color:transparent;border:1px solid #bdbdbd;cursor:pointer;}.css-b41ts0.Mui-disabled{opacity:0.38;pointer-events:none;}.css-b41ts0 .MuiChip-avatar{margin-left:5px;margin-right:-6px;width:24px;height:24px;color:#616161;font-size:0.75rem;}.css-b41ts0 .MuiChip-avatarColorPrimary{color:#fff;background-color:#1565c0;}.css-b41ts0 .MuiChip-avatarColorSecondary{color:#fff;background-color:#7b1fa2;}.css-b41ts0 .MuiChip-avatarSmall{margin-left:4px;margin-right:-4px;width:18px;height:18px;font-size:0.625rem;}.css-b41ts0 .MuiChip-icon{color:#616161;margin-left:4px;margin-right:-4px;font-size:18px;}.css-b41ts0 .MuiChip-deleteIcon{-webkit-tap-highlight-color:transparent;color:rgba(0, 0, 0, 0.26);font-size:16px;cursor:pointer;margin:0 5px 0 -6px;margin-right:4px;margin-left:-4px;}.css-b41ts0 .MuiChip-deleteIcon:hover{color:rgba(0, 0, 0, 0.4);}.css-b41ts0.MuiChip-clickable:hover{background-color:rgba(0, 0, 0, 0.04);}.css-b41ts0.Mui-focusVisible{background-color:rgba(0, 0, 0, 0.12);}.css-b41ts0 .MuiChip-avatar{margin-left:4px;}.css-b41ts0 .MuiChip-avatarSmall{margin-left:2px;}.css-b41ts0 .MuiChip-icon{margin-left:4px;}.css-b41ts0 .MuiChip-iconSmall{margin-left:2px;}.css-b41ts0 .MuiChip-deleteIcon{margin-right:5px;}.css-b41ts0 .MuiChip-deleteIconSmall{margin-right:3px;}</style><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><style data-emotion="css 1pjtbja">.css-1pjtbja{overflow:hidden;text-overflow:ellipsis;padding-left:8px;padding-right:8px;white-space:nowrap;}</style><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">devops</span></div></a><a style="text-decoration:none" href="/?tag=git"><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">git</span></div></a><a style="text-decoration:none" href="/?tag=linux"><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">linux</span></div></a><a style="text-decoration:none" href="/?tag=nodejs"><div class="MuiChip-root MuiChip-outlined MuiChip-sizeSmall MuiChip-colorDefault MuiChip-outlinedDefault css-b41ts0"><span class="MuiChip-label MuiChip-labelSmall css-1pjtbja">nodejs</span></div></a></div><style data-emotion="css y6ucz">.css-y6ucz{margin:0;font-family:"Roboto","Helvetica","Arial",sans-serif;font-weight:400;font-size:1rem;line-height:1.75;letter-spacing:0.00938em;color:rgba(0, 0, 0, 0.38);}</style><i class="MuiTypography-root MuiTypography-subtitle1 css-y6ucz"><div><span>rédigé le 23/10/18<!-- --> </span>par <!-- -->Behrouze</div></i></main><footer><style data-emotion="css 1cksea9">.css-1cksea9{border-top:1px solid #90a4ae;margin:2rem 0;padding:1.5rem 0;}@media (min-width:0px){.css-1cksea9{display:none;}}@media (min-width:600px){.css-1cksea9{display:block;}}</style><div class="MuiBox-root css-1cksea9"><style data-emotion="css 1hq69am">.css-1hq69am{-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><style data-emotion="css 1l5ulo5">.css-1l5ulo5{margin:0;color:#37474f;-webkit-text-decoration:none;text-decoration:none;margin-right:2rem;}</style><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/linux-systemd"></a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/a-propos-contact">A propos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/cheat-sheets">Cheat Sheets</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/tools">Outils</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/must-see-videos">Vidéos</a><a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1l5ulo5" href="/npm">npm</a></div></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script>
   
   
   if(true) {
@@ -165,4 +231,4 @@ heroku addons:open papertrail # ouvre la page web de Papertrail</p>
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/heroku-nodejs";window.___webpackCompilationHash="b091afdf7cb05d579448";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-c7b1d006b53087ecd6d5.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-c5813646c26a5435190b.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-795d93a539825099c570.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-1d72f15a660aac9e0b11.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-c7b1d006b53087ecd6d5.js" async=""></script><script src="/framework-9885544f92f45c4490b7.js" async=""></script><script src="/webpack-runtime-0cfa4ca04d792ac096ab.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/heroku-nodejs";window.___webpackCompilationHash="61344edf314422479f20";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-c7b1d006b53087ecd6d5.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-c5813646c26a5435190b.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-795d93a539825099c570.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-1d72f15a660aac9e0b11.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-c7b1d006b53087ecd6d5.js" async=""></script><script src="/framework-9885544f92f45c4490b7.js" async=""></script><script src="/webpack-runtime-0cfa4ca04d792ac096ab.js" async=""></script></body></html>
