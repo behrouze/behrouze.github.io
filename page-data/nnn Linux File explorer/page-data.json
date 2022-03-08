@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-wp-post-tsx",
+    "path": "/nnn Linux File explorer",
+    "result": {"pageContext":{"id":"cb51351a-392e-5efc-9277-f0f6234eb1ae","fileAbsolutePath":"/home/behrouze/Sources/gatsby-blog/obsidian/Blog/nnn Linux File explorer.md","frontmatter":{"categories":["linux"],"date":"2022-03-08","lastUpdate":"2022-03-08","tags":["linux","tips","cli","file","folder","explorateur","explorer","file-explorer"],"title":"nnn Linux File explorer"},"html":"<p><code class=\"language-text\">nnn</code> est un explorateur de fichier pour Linux en mode CLI qui évite de tapper des <code class=\"language-text\">cd</code> a rallonge 😵, facile à prendre en main, léger et paramétrable.</p>\n<h1>Liens</h1>\n<ul>\n<li><a href=\"https://github.com/jarun/nnn#nnn---supercharge-your-productivity\">repo github de nnn</a></li>\n<li>article sur <a href=\"https://itsfoss.com/nnn-file-browser-linux/\">it's FOSS</a></li>\n<li>article sur <a href=\"https://www.fossmint.com/nnn-linux-terminal-file-browser/\">FOSSMint</a></li>\n</ul>"}},
+    "staticQueryHashes": ["1026020893","28434099","3153813225"]}
