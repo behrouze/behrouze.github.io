@@ -12,13 +12,15 @@ Systemd n'est donc pas qu'un <em>init system</em>, mais bien un ensemble de serv
 </blockquote>
 <p>- man systemd</p>
 <h2>Les commandes de gestion principales</h2>
-<p>Les commandes suivantes permettent de gerer les différents composants de systemd :
-<code class="language-text">systemctl</code>: permet d'envoyer des commandes a systemd (manager)
-<code class="language-text">journalctl</code>: journal centralisé de systemd (et donc des services)
-<code class="language-text">timedatectl</code>: date/heure du serveur
-<code class="language-text">hostnamectl</code>: nom de la machine
-<code class="language-text">localectl</code>: configuration des locales et du clavier
-<code class="language-text">loginctl</code>: login manager</p>
+<p>Les commandes suivantes permettent de gerer les différents composants de systemd :</p>
+<ul>
+<li><code class="language-text">systemctl</code>: permet d'envoyer des commandes a systemd (manager)</li>
+<li><code class="language-text">journalctl</code>: journal centralisé de systemd (et donc des services)</li>
+<li><code class="language-text">timedatectl</code>: date/heure du serveur</li>
+<li><code class="language-text">hostnamectl</code>: nom de la machine</li>
+<li><code class="language-text">localectl</code>: configuration des locales et du clavier</li>
+<li><code class="language-text">loginctl</code>: login manager</li>
+</ul>
 <p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 850px; box-shadow: 3px 5px 4px rgba(0,0,0,.1);margin:1rem;"
@@ -58,34 +60,55 @@ Systemd n'est donc pas qu'un <em>init system</em>, mais bien un ensemble de serv
 <a href="https://commons.wikimedia.org/wiki/File:Linux_kernel_unified_hierarchy_cgroups_and_systemd.svg">source</a></p>
 <h1>systemctl</h1>
 <p>Pour <strong>gérer les services</strong> (<code class="language-text">start</code>, <code class="language-text">stop</code>, <code class="language-text">restart</code>, <code class="language-text">status</code>) sur un système Linux disposant de <code class="language-text">systemd</code>, nous pouvons utiliser la commande <code class="language-text">systemctl</code> (anciennement <code class="language-text">service</code>).</p>
-<p>Ces services sont <em>créés/paramétrés</em> via des <em>fichiers de configuration</em> se trouvant dans <code class="language-text">/etc/systemd/system/</code> et il est possible de <a href="https://doc.ubuntu-fr.org/creer_un_service_avec_systemd">créer simplement soi-même des services</a> pour lancer par ex une application web au démarrage du système.</p>
-<p><code class="language-text">systemctl enable monservice.service</code> : active (<code class="language-text">enable</code>) ou désactive (<code class="language-text">disable</code>) le service pour un <strong>démarrage auto au boot de la machine</strong>.<br>
-Il existe ensuite un ensemble de paramètres permettant d’interagir interactivement avec nos services.</p>
-<p><code class="language-text">systemctl status</code> : donne sous forme d’<strong>arborescence</strong> la liste des <strong>services démarrés</strong>, et l’état global (running : tout va bien, degraded : un ou pls services sont en carafe)</p>
-<p><code class="language-text">systemctl status nom-du-service</code> : donne l’état du service et ses options/infos de démarrage (il est possible d’omettre l’extension .service dans le nom du service)</p>
-<p><code class="language-text">systemctl list-unit-files</code> : liste l’<strong>ensemble des services installés</strong> et leurs <strong>status</strong> (static | enabled | disabled | masked)</p>
-<p><code class="language-text">systemctl list-units --failed</code> : liste les <strong>services en échec</strong></p>
-<p><code class="language-text">systemctl -p LogLevel show</code> : affiche le <strong>LogLevel de systemd</strong>, <em>info</em> par défaut (qui peut polluer les logs rsyslog)</p>
-<p><code class="language-text">systemd-analyze set-log-level notice</code> : permet de <strong>modifier le LogLevel de systemd</strong> <strong>temporairement</strong> (jusqu’au prochain reboot)</p>
-<p><code class="language-text">systemctl daemon-reexec</code> : redémarrage du <strong>service systemctl</strong> (sans rebooter)</p>
-<p><code class="language-text">systemctl daemon-reload</code> : *<em>après avoir modifié un fichier <em>.service</em></em> de définition de service (/etc/systemd/system/) il faut recharger systemctl avec cette commande avant de pourvoir ré-interagir avec</p>
+<p>Ces services sont <em>créés/paramétrés</em> via des <em>fichiers de configuration</em> se trouvant dans <code class="language-text">/etc/systemd/system/</code> ce qui permet de <a href="https://doc.ubuntu-fr.org/creer_un_service_avec_systemd">créer simplement soi-même des services</a> pour lancer par ex une application web au démarrage du système.</p>
 <h2>Liste des commandes systemctl</h2>
-<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">systemctl status <span class="token comment"># arborescence</span>
-systemctl list-units --failed <span class="token comment"># services en échec</span>
-systemctl status nom-du-service <span class="token comment"># état du service et ses options/infos de démarrage</span>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">systemctl list-units --failed <span class="token comment"># services en échec</span>
 systemctl list-unit-files <span class="token comment"># ensemble des services installés et leurs status </span>
+
+systemctl status <span class="token comment"># arborescence</span>
+systemctl status nom-du-service <span class="token comment"># état du service et ses options/infos de démarrage</span>
+
+systemctl status/start/stop/restart/reload nom-du-service <span class="token comment"># gestion d'un service</span>
+systemctl enable/disable nom-du-service <span class="token comment"># activation/désactivation d'un service</span>
+
 systemctl -p LogLevel show <span class="token comment"># affiche le LogLevel de systemd</span>
 systemd-analyze set-log-level notice <span class="token comment"># modifier le LogLevel jusqu'au prochain reboot</span>
-systemctl daemon-reexec <span class="token comment"># redémarrage du service systemctl (sans rebooter)</span></code></pre></div>
+
+systemctl daemon-reexec <span class="token comment"># redémarrage du service systemctl (sans rebooter)</span>
+systemctl daemon-reload <span class="token comment"># pour prendre en compte une modification de .service</span></code></pre></div>
 <h1>journalctl</h1>
-<p>Les services gérés par <strong>systemd</strong> ont leurs logs accessible par défaut (souvent paramétrable) via la commande <code class="language-text">journalctl</code> utile pour voir les logs des services en échec (option <code class="language-text">-f</code> pour follow)</p>
-<p>Pour lister les entrées du journal d’aujourd’hui <strong>spécifique au service spécifié</strong> par l’option <code class="language-text">-u</code></p>
-<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">journalctl -u nginx.service         <span class="token comment"># filtrer par nom de service</span>
+<p>Les services gérés par <strong>systemd</strong> ont leurs logs accessible par défaut via la commande <code class="language-text">journalctl</code>.</p>
+<p>Pour lister les entrées du journal d’aujourd’hui <strong>spécifique au service spécifié</strong> par l’option <code class="language-text">-u nom-service.service</code> (le <code class="language-text">.service</code> peut etre omis).</p>
+<p>Pour éviter de devoir <code class="language-text">sudo</code> il faut faire parti de l'un des groupes <code class="language-text">adm</code> ou <code class="language-text">systemd-journal</code> (voir <a href="linux-gestion-des-utilisateurs.md">Gestion des groupes d'utilisateurs</a>)</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">journalctl -u nginx         <span class="token comment"># filtrer par nom de service</span>
 journalctl -f                       <span class="token comment"># follow</span>
 journalctl -n <span class="token number">50</span>                    <span class="token comment"># nombre de lignes</span>
-journalctl --since today
-journalctl --since <span class="token string">"3 hours ago"</span>
-journalctl --since <span class="token string">"3 days ago"</span></code></pre></div>
+
+journalctl --since today            <span class="token comment"># --since ou -S</span>
+journalctl --until yesterday        <span class="token comment"># --until ou -U</span>
+
+<span class="token comment">## Exemples</span>
+<span class="token comment"># events de nginx sur la dernière heure</span>
+journalctl -u nginx --output<span class="token operator">=</span>short-full -S -1h
+
+<span class="token comment"># tous les events loggés les 10 dernières minutes </span>
+journalctl -S -10m</code></pre></div>
+<h2>Temps</h2>
+<p>Pour la spécification du temps (<code class="language-text">-S</code> ou <code class="language-text">-U</code>) il est possible de spécifier :</p>
+<ul>
+<li>"yesterday", "today", "tomorrow", "now"</li>
+<li>une durée relative avec <code class="language-text">-</code> ou <code class="language-text">+</code> un chiffre et une unité de temps :
+•   usec, us, µs
+•   msec, <code class="language-text">ms</code>
+•   seconds, second, sec, <code class="language-text">s</code>
+•   minutes, minute, min, <code class="language-text">m</code>
+•   hours, hour, hr, <code class="language-text">h</code>
+•   days, day, <code class="language-text">d</code>
+•   weeks, week, <code class="language-text">w</code>
+•   months, month, <code class="language-text">M</code> (defined as 30.44 days)
+•   years, year, <code class="language-text">y</code> (defined as 365.25 days)</li>
+</ul>
+<p>voir <code class="language-text">man systemd.time</code> pour plus d'infos sur les formats de date</p>
 <h2>Gestion du journal</h2>
 <div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">journalctl --verify
 journalctl --disk-usage</code></pre></div>
