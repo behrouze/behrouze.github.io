@@ -57,6 +57,22 @@ et possibilité d'importer plusieurs package en avec une meme instruction (ici e
 <h2>Commentaires</h2>
 <p>On utilise les classiques <code class="language-text">//</code> pour un commentaire sur 1 ligne ou <code class="language-text">/*   */</code> pour les commentaires multilignes.</p>
 <p>De plus il est <a href="https://github.com/golang/go/wiki/Comments">conseillé</a> d'ajouter un <em>commentaire de package</em>, qui pourra etre extrait par <a href="https://pkg.go.dev/golang.org/x/tools/cmd/godoc#pkg-overview">Godoc</a>.</p>
+<h2>Types et Variables</h2>
+<h3>Named vs UnNamed</h3>
+<p>Les "chaines de caractères" ou les nombres sont appelés des <strong>literals</strong> et peuvent etre utilisés tel quel dans du code (sont donc en quelque sorte des <em>unnamed values</em>) pour des opérations (pour les nombres) ou des traitements.</p>
+<p>Les named values d'un autre coté sont des constantes ou des variables :</p>
+<div class="gatsby-highlight" data-language="go"><pre class="language-go"><code class="language-go"><span class="token keyword">const</span> unTextQuelconque <span class="token operator">=</span> <span class="token string">"Hello toto !"</span></code></pre></div>
+<p>Les variables sont <strong>initialisées automatiquement</strong> : <code class="language-text">0</code>, <code class="language-text">""</code> ou <code class="language-text">false</code></p>
+<h3>Nombres</h3>
+<p>Les variables numériques peuvent etre catégorisé en :  <code class="language-text">int</code>, <code class="language-text">float</code>, and <code class="language-text">complex</code></p>
+<div class="gatsby-highlight" data-language="go"><pre class="language-go"><code class="language-go"><span class="token keyword">var</span> uneVarNum <span class="token builtin">uint8</span> <span class="token comment">// déclaration seule</span>
+uneVarNum <span class="token operator">=</span> <span class="token number">10</span>
+
+uneAutreVarInt <span class="token operator">:=</span> <span class="token number">0</span> <span class="token comment">// déclaration et initialisation d'une variable avec inférence de type</span>
+<span class="token keyword">var</span> uneDerniereBool <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token comment">// autre syntaxe pour l'inference</span>
+
+<span class="token keyword">var</span> magicNum<span class="token punctuation">,</span> powerLevel <span class="token builtin">int32</span> <span class="token comment">// déclaration multiple</span>
+unTexte<span class="token punctuation">,</span> unBooleen <span class="token operator">:=</span> <span class="token string">"blah blah blah"</span><span class="token punctuation">,</span> <span class="token boolean">true</span></code></pre></div>
 <h1>Documentation en ligne</h1>
 <p>la commande <code class="language-text">go doc</code> permet d'obtenir de l'aide sur un package ou un membre d'un package:</p>
 <div class="gatsby-highlight" data-language="go"><pre class="language-go"><code class="language-go"><span class="token keyword">go</span> doc fmt             # affichera l'<span class="token builtin">int</span>égralité de la doc du <span class="token keyword">package</span> fmt
