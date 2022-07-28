@@ -65,10 +65,11 @@ module<span class="token punctuation">.</span><span class="token function-variab
 <h1>Graphql</h1>
 <p>L'un des gros avantages de Strapi est qu'il nous mets à disposition une API REST ou GraphQL de façon très simple.</p>
 <p>L'interface de GraphiQl est accessible en local via <code class="language-text">http://localhost:1337/graphql</code> mais nécessite une <strong>API Key</strong> pour autoriser les requêtes.
-Il faut la générer dans l'UI d'admin de Strapi > Settings et qui doit être injectée via Query Variable :<br>
-{bearer: "66a8...3b97014"}
-via HTTP Headers :<br>
-{ "Authorization": "Bearer "66a8...3b97014" }</p>
+Il faut la générer dans l'UI d'admin de <code class="language-text">Strapi > Settings > API Tokens</code> et qui doit être injectée via :</p>
+<ul>
+<li>Query Variable : {bearer: "66a8...3b97014"}</li>
+<li>ou HTTP Headers : { "Authorization": "Bearer "66a8...3b97014" }</li>
+</ul>
 <h1>i18n</h1>
 <div class="gatsby-highlight" data-language="graphql"><pre class="language-graphql"><code class="language-graphql"><span class="token keyword">query</span> <span class="token punctuation">{</span>
   <span class="token property-query">ingredients</span><span class="token punctuation">(</span><span class="token attr-name">locale</span><span class="token punctuation">:</span> <span class="token string">"en"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -94,6 +95,13 @@ via HTTP Headers :<br>
 <li><a href="https://market.strapi.io/plugins/@localazy-strapi-plugin?utm_campaign=strapi%20market&#x26;utm_source=email&#x26;utm_medium=logbook54&#x26;utm_content=strapiweekly">Localazy</a> to <strong>manage your multilingual content</strong> with ease and translate it seamlessly. A must if your project is at different locations</li>
 <li><a href="https://market.strapi.io/plugins/@notum-cz-strapi-plugin-content-versioning">Content Versioning</a> A Strapi plugin for managing versions of your content (<a href="https://strapi.io/blog/new-community-plugin-content-versioning">why NOTUM tech built it</a>)</li>
 </ul>
+<h1>Upgrades/updates</h1>
+<p>Strapi distingue les migrations (qui incluent des breaking changes), des updates classiques.
+Dans le 1er cas, il faut se reporter aux <a href="https://docs.strapi.io/developer-docs/latest/update-migration-guides/migration-guides.html">guides de migration</a>, et les jouer séquentiellement.
+Dans le cas de l'update il suffit simplement mettre à jour et build le projet :</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">yarn</span> up <span class="token string">"@strapi/*"</span>    <span class="token comment"># mets à jour tous les packages @strapi</span>
+<span class="token function">yarn</span> build             <span class="token comment"># build l'admin panel</span>
+<span class="token function">yarn</span> start</code></pre></div>
 <h1>News</h1>
 <p>Avec l'arrivée de la version <a href="https://github.com/strapi/strapi/releases/tag/v4.3.0">v4.3.0</a> Strapi supporte désormais <a href="https://docs.strapi.io/developer-docs/latest/development/typescript.html">Typescript</a> (pour les developpements back "Strapi")	et donne la possibilité de créer des dossier pour la gestion de médias 📁 <a href="https://www.youtube.com/watch?v=PimJ5Ogho28">Media Library folders</a></p>
 <h1>Liens</h1>
