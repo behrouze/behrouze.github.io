@@ -32,18 +32,7 @@
           />
         </picture>
     </span></a> <strong>git</strong> est un <strong>système de gestion de version</strong> collaboratif qui permet de garder un historique des modifications effectuées sur un ensemble de fichiers à l'instar de TFS de Microsoft. L'une des particularités de Git est qu'il est possible de travailler en local en bénéficiant de la navigation à travers l'historique de nos fichiers.</p>
-<h2>Initialisation local</h2>
-<p>Lorsqu'on veut qu'une arborescence puisse être gérée par le système Git, il faut <strong>initialiser le dossier "racine"</strong> c'est à dire que l'on crée un <strong>repository</strong> avec la commande <strong>git init.</strong> Pour cela on se positionne dans le dossier en question puis exécuter la commande : git init .</p>
-<p>Cela va créer un dossier .git (caché) qui contient toutes les informations concernant le nouveau git repository.</p>
-<h2>Connexion au git server</h2>
-<p>Pour pouvoir travailler sur un repo distant il suffit :</p>
-<ol>
-<li>d'avoir un compte sur le <strong>site</strong> (Github, bitbucket etc.) ou <strong>serveur git distant</strong> (git server est disponible sur Linux mais aussi sur les NAS synology par ex)</li>
-<li>d'avoir un repository créé sur le serveur</li>
-<li>de disposer de l'URI de ce repo distant et des droits suffisant pour se connecter à distance sur le serveur</li>
-</ol>
-<p>git remote add nom_de_notre_connexion uri</p>
-<h2>Utilisation de base</h2>
+<h1>Commandes de base</h1>
 <p><code class="language-text">git status</code>  : indique l'<strong>état</strong> de notre répo local ainsi que la <strong>branche</strong> sur la quelle nous travaillons. Il est intéressant de l'utiliser constamment pour voir où on en est dans le workflow</p>
 <p><code class="language-text">git log</code>  : donne l'<strong>historique</strong> des opérations (se positionner dans un répertoire déjà initialisé) git log --oneline  fourni un listing condensé.</p>
 <p><code class="language-text">git log -p</code> :  donne l'<strong>historique</strong> + liste des fichiers modifiés dans chaque commit &#x26; diff</p>
@@ -55,7 +44,8 @@
 <p><code class="language-text">git pull</code>  : récupère les modifications coté serveur (fichiers modifiés ou ajoutés). Cette commande est équivalent à un <strong>git fetch</strong> (récupère les fichiers distants) puis un <strong>git merge</strong> (ajouter les fichiers distant ajouté à notre branche)</p>
 <p><code class="language-text">git rebase -i HEAD~10</code> : permet de <a href="https://git-scm.com/book/fr/v1/Utilitaires-Git-R%C3%A9%C3%A9crire-l-historique#Modifier-plusieurs-messages-de-validation">nettoyer un historique</a> (ici les 10 derniers) de commits dégueux pas encore pushés en utilisant 'f' fixup pour fondre les commits  (<a href="http://www.siliconfidential.com/articles/15-seconds-to-cleaner-git-history/">credit</a> et <a href="https://github.com/mockito/mockito/wiki/Using-git-to-prepare-your-PR-to-have-a-clean-history">aussi</a>), voir aussi git rebase  <a href="https://git-scm.com/book/fr/v2/Les-branches-avec-Git-Rebaser-Rebasing">ici</a></p>
 <p><code class="language-text">git mv &lt;source> &lt;destination></code> : commande souvent méconnue, permet de renommer un dossier/fichier sans perdre son historique (ce qui est le cas si on effectue la manip autrement)</p>
-<h2>Utilisation avancée</h2>
+<p><code class="language-text">git fetch origin &amp;&amp; git reset --hard origin/master</code>  : pour reset sa branche (ici master) avec celle dispo sur le serveur</p>
+<h1>Utilisation avancée</h1>
 <p>Pour l'inclusion d'un sous répo dans notre répo pour par exemple mutualiser des sources ou du contenu markdown, voir <a href="git-submodule-subtree.md">git subtree ou git submodule</a>.</p>
 <h2>Git Branch</h2>
 <p>Les <a href="https://git-scm.com/book/fr/v2/Les-branches-avec-Git-Les-branches-en-bref">branches</a> permettent de <strong>travailler de façon isolée sur une "copie"</strong> de l'ensemble du code du répo et il est alors possible de simplement passer d'une branche à l'autre avec des <strong>git checkout</strong>. C'est utile par exemple lorsqu'on veut implémenter une nouvelle fonctionnalité ou corriger un bug sans affecter le code existant. Pour info, la branche créée à l'initialisation du repo s'appelle "<strong>master</strong>".</p>
@@ -65,21 +55,6 @@
 <p><code class="language-text">git checkout -</code>  : se <strong>positionner</strong> sur la branche précédente, permet de jongler entre 2 branches</p>
 <p><code class="language-text">git checkout -b ma-nouvelle-branche</code>  : permet de <strong>créer une nouvelle branche</strong> <em>ma-nouvelle-branche</em> <strong>et se</strong> <strong>positionner</strong> dessus</p>
 <p><code class="language-text">git merge ma-nouvelle-branche</code>  : merge les commits de la branche  ma-nouvelle-branche sur la branche courante (se positionner sur Master pour redescendre ses devs)</p>
-<h2>Workflow</h2>
-<p>Le <strong>workflow git de base</strong> est donc le suivant (en répétant les étapes suivantes 1 et 2) :</p>
-<ol>
-<li><code class="language-text">git checkout -b ma-nouvelle-branche</code></li>
-<li>...travailler sur des fichiers</li>
-<li><code class="language-text">git add .</code></li>
-<li><code class="language-text">git commit -m "msg"</code></li>
-<li><code class="language-text">git push</code></li>
-</ol>
-<p>On a ainsi une branche <em>ma-nouvelle-branche</em> qui contiendra des modifications qu'il faudra <code class="language-text">rebase</code> ou <code class="language-text">merge</code> sur la <code class="language-text">master</code> (ou <code class="language-text">main</code> qui est la branche de référence, clean).</p>
-<p>Il existe des <strong>workflow git</strong> répendus utilisés sur les projets de grande envergure, faisant collaborer de nombreux développeurs :</p>
-<ul>
-<li><a href="https://guides.github.com/introduction/flow/">GitHub flow</a></li>
-<li><a href="https://fr.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">Gitflow</a> (<a href="https://medium.com/@OVHUXLabs/la-puissance-des-workflows-git-12e195cafe44">article</a>).</li>
-</ul>
 <h2>Git config</h2>
 <p>Git comporte <strong>3 niveaux de configuration</strong>, que l'on peut modifier avec la commande <a href="https://git-scm.com/docs/git-config.html">git config</a> (<code class="language-text">git config --system|global|local</code>):</p>
 <ol>
@@ -96,14 +71,41 @@
 <p>modifie le repo courant avec <code class="language-text">.git/config</code></p>
 <p>Attention en cas de redéfinition de clés de config voici la priorité (la plus spécifique gagne):
 <strong>local > global > system</strong></p>
-<h3>Exemples</h3>
+<h2>Exemples</h2>
 <p><strong>configuration</strong> niveau utilisateur de l'éditeur utilisé dans les commandes git interactives :
 <code class="language-text">git config --global core.editor vi</code></p>
 <p>pour <strong>lister</strong> la config locale :  
 <code class="language-text">git config --local -l</code></p>
 <p>pour supprimer une clé (ici <code class="language-text">pull.rebase</code>) :
 <code class="language-text">git config --global --unset pull.rebase</code></p>
-<h2>Git et SSH sous Windows</h2>
+<h1>Configuration / Setup</h1>
+<h2>Initialisation local</h2>
+<p>Lorsqu'on veut qu'une arborescence puisse être gérée par le système Git, il faut <strong>initialiser le dossier "racine"</strong> c'est à dire que l'on crée un <strong>repository</strong> avec la commande <strong>git init.</strong> Pour cela on se positionne dans le dossier en question puis exécuter la commande : git init .</p>
+<p>Cela va créer un dossier .git (caché) qui contient toutes les informations concernant le nouveau git repository.</p>
+<h2>Connexion au git server</h2>
+<p>Pour pouvoir travailler sur un repo distant il suffit :</p>
+<ol>
+<li>d'avoir un compte sur le <strong>site</strong> (Github, bitbucket etc.) ou <strong>serveur git distant</strong> (git server est disponible sur Linux mais aussi sur les NAS synology par ex)</li>
+<li>d'avoir un repository créé sur le serveur</li>
+<li>de disposer de l'URI de ce repo distant et des droits suffisant pour se connecter à distance sur le serveur</li>
+</ol>
+<p>git remote add nom_de_notre_connexion uri</p>
+<h1>Workflow</h1>
+<p>Le <strong>workflow git de base</strong> est donc le suivant (en répétant les étapes suivantes 1 et 2) :</p>
+<ol>
+<li><code class="language-text">git checkout -b ma-nouvelle-branche</code></li>
+<li>...travailler sur des fichiers</li>
+<li><code class="language-text">git add .</code></li>
+<li><code class="language-text">git commit -m "msg"</code></li>
+<li><code class="language-text">git push</code></li>
+</ol>
+<p>On a ainsi une branche <em>ma-nouvelle-branche</em> qui contiendra des modifications qu'il faudra <code class="language-text">rebase</code> ou <code class="language-text">merge</code> sur la <code class="language-text">master</code> (ou <code class="language-text">main</code> qui est la branche de référence, clean).</p>
+<p>Il existe des <strong>workflow git</strong> répendus utilisés sur les projets de grande envergure, faisant collaborer de nombreux développeurs :</p>
+<ul>
+<li><a href="https://guides.github.com/introduction/flow/">GitHub flow</a></li>
+<li><a href="https://fr.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">Gitflow</a> (<a href="https://medium.com/@OVHUXLabs/la-puissance-des-workflows-git-12e195cafe44">article</a>)</li>
+</ul>
+<h1>Git et SSH sous Windows</h1>
 <p>Sous Windows <strong>faire attention au format de clés SSH</strong> (qu'il suffit de tester en essayant de se connecter avec le compte dédié au serveur git sur ce seveur, s'il l'autorise), à défaut utiliser PuTTY Key Generator pour <strong>convertir la clé privée</strong>:</p>
 <p><img src="2019-02-12-22_22_11-PuTTY-Key-Generator.png" alt="PuTTY-Key-Generator"></p>
 <p>Il est ensuite préférable d’utiliser un <strong>fichier de config SSH</strong> (qui va associer une clé donnée à un serveur), ce fichier a créer s'il n'existe pas : <code class="language-text">%USERPROFILE%\.ssh\config</code>  va contenir un ensemble de blocs</p>
@@ -111,13 +113,13 @@
 Hostname adresse.dsn.de.mon.server.git.com
 IdentityFile ~/.ssh/ed25519.ppk
 IdentitiesOnly <span class="token function">yes</span></code></pre></div>
-<h2>Outils</h2>
+<h1>Outils</h1>
 <ul>
 <li>Windows: <code class="language-text">choco install git</code>  ou <a href="https://gitforwindows.org">git SCM</a></li>
 <li>Linux: <code class="language-text">sudo apt install git-core -y</code></li>
 <li>Outils graphiques : <a href="https://www.gitkraken.com/download">Git Kraken</a> (multiplateforme) et le tout nouveau <a href="https://www.sublimemerge.com/">Sublime Merge</a></li>
 </ul>
-<h2>Liens</h2>
+<h1>Liens</h1>
 <ul>
 <li>la <a href="https://git-scm.com/book/fr/v2">doc git en Francais</a></li>
 <li><a href="https://try.github.io/">ressources officiels</a> et <a href="https://services.github.com/on-demand/downloads/fr/github-git-cheat-sheet/">aide mémoire git</a></li>
@@ -141,4 +143,4 @@ IdentitiesOnly <span class="token function">yes</span></code></pre></div>
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/git";window.___webpackCompilationHash="b091afdf7cb05d579448";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-c7b1d006b53087ecd6d5.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-c5813646c26a5435190b.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-795d93a539825099c570.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-1d72f15a660aac9e0b11.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-c7b1d006b53087ecd6d5.js" async=""></script><script src="/framework-9885544f92f45c4490b7.js" async=""></script><script src="/webpack-runtime-0cfa4ca04d792ac096ab.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/git";window.___webpackCompilationHash="41708d68f03b2bbaec5a";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-14d23f0c9fb58e155a8c.js"],"app":["/app-c7b1d006b53087ecd6d5.js"],"component---src-pages-404-js":["/component---src-pages-404-js-73ec88530ccbc327b9bd.js"],"component---src-pages-index-tsx":["/component---src-pages-index-tsx-c5813646c26a5435190b.js"],"component---src-templates-wp-page-tsx":["/component---src-templates-wp-page-tsx-795d93a539825099c570.js"],"component---src-templates-wp-post-tsx":["/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js"]};/*]]>*/</script><script src="/polyfill-14d23f0c9fb58e155a8c.js" nomodule=""></script><script src="/component---src-templates-wp-post-tsx-9a83c07f1892a60f7dd4.js" async=""></script><script src="/bd9a198b5f7fb6fa7f93111e3cc9693331ac2819-1d72f15a660aac9e0b11.js" async=""></script><script src="/commons-30350ba6450927006b33.js" async=""></script><script src="/app-c7b1d006b53087ecd6d5.js" async=""></script><script src="/framework-9885544f92f45c4490b7.js" async=""></script><script src="/webpack-runtime-0cfa4ca04d792ac096ab.js" async=""></script></body></html>
